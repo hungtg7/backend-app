@@ -24,5 +24,6 @@ func CustomAuthFunc(ctx context.Context) (context.Context, error) {
 }
 
 func verifyToken(ctx context.Context) (string) {
+	// TODO use JWT authentication
 	return "customToken"
 }
