@@ -1,9 +1,10 @@
 generate:
 	buf generate
+	cd ssl; sh ssl-gen.sh
 
 lint:
 	buf lint
-	buf breaking --against 'https://github.com/johanbrandhorst/grpc-gateway-boilerplate.git#branch=master'
+	buf breaking --against 'https://github.com/hungtran150/api-app.git#branch=master'
 
 BUF_VERSION:=0.51.1
 
