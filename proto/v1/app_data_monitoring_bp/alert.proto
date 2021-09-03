@@ -1,0 +1,118 @@
+syntax="proto3";
+package app_data_monitoring.v1;
+
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+option go_package = "github.com/hungtran150/api-app/proto/v1/app_data_monitoring_bp;app_data_monitoring_bp";
+
+// These annotations are used when generating the OpenAPI file.
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+    info: {
+      version: "1.0";
+    }
+    external_docs: {
+      url: "https://github.com/hungtran150/api-app";
+      description: "gRPC-gateway";
+    }
+    security_definitions: {
+        security: {
+          key: "bearer"
+          value: {
+            type: TYPE_API_KEY
+            in: IN_HEADER
+            name: "Authorization"
+            description: "Authentication token, prefixed by Bearer: Bearer <token>"
+          }
+        }
+      }
+      security: {
+        security_requirement: {
+          key: "bearer"
+        }
+      }
+    schemes: HTTPS;
+  };
+
+service AlertService {
+    rpc CreateAlertNotification(SlackAlertRequest) returns (SlackAlertResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/alert"
+            body: "*"
+          };
+    }
+}
+
+message SlackAlertRequest {
+
+    message Selected_options {
+        string value = 1;
+    }
+
+    message Actions {
+        string name = 1;
+        string type = 2;
+        repeated Selected_options selected_options = 3;
+    }
+
+    message Team {
+        string id = 1;
+        string domain = 2;
+    }
+
+    message Channel {
+        string id = 1;
+        string name = 2;
+    }
+
+    message User {
+        string id = 1;
+        string name = 2;
+    }
+
+    message Actions1 {
+        string id = 1;
+        string name = 2;
+        string text = 3;
+        string type = 4;
+        string data_source = 5;
+    }
+
+    message Attachments {
+        string callback_id = 1;
+        string text = 2;
+        uint32 id = 3;
+        string color = 4;
+        repeated Actions1 actions = 5;
+        string fallback = 6;
+    }
+
+    message Original_message {
+        string text = 1;
+        string username = 2;
+        string bot_id = 3;
+        repeated Attachments attachments = 4;
+        string type = 5;
+        string subtype = 6;
+        string ts = 7;
+    }
+
+    string type = 1;
+    repeated Actions actions = 2;
+    string callback_id = 3;
+    Team team = 4;
+    Channel channel = 5;
+    User user = 6;
+    string action_ts = 7;
+    string message_ts = 8;
+    string attachment_id = 9;
+    string token = 10;
+    bool is_app_unfurl = 11;
+    Original_message original_message = 12;
+    string response_url = 13;
+    string trigger_id = 14;
+}
+
+message SlackAlertResponse {
+    int32 code = 1;
+}

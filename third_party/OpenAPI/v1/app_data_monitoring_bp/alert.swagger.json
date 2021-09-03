@@ -1,0 +1,297 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "v1/app_data_monitoring_bp/alert.proto",
+    "version": "1.0"
+  },
+  "tags": [
+    {
+      "name": "AlertService"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/v1/alert": {
+      "post": {
+        "operationId": "AlertService_CreateAlertNotification",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1SlackAlertResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1SlackAlertRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AlertService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "SlackAlertRequestActions": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "selectedOptions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SlackAlertRequestSelected_options"
+          }
+        }
+      }
+    },
+    "SlackAlertRequestActions1": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "dataSource": {
+          "type": "string"
+        }
+      }
+    },
+    "SlackAlertRequestAttachments": {
+      "type": "object",
+      "properties": {
+        "callbackId": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "color": {
+          "type": "string"
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SlackAlertRequestActions1"
+          }
+        },
+        "fallback": {
+          "type": "string"
+        }
+      }
+    },
+    "SlackAlertRequestChannel": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "SlackAlertRequestOriginal_message": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "botId": {
+          "type": "string"
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SlackAlertRequestAttachments"
+          }
+        },
+        "type": {
+          "type": "string"
+        },
+        "subtype": {
+          "type": "string"
+        },
+        "ts": {
+          "type": "string"
+        }
+      }
+    },
+    "SlackAlertRequestSelected_options": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "SlackAlertRequestTeam": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        }
+      }
+    },
+    "SlackAlertRequestUser": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "typeUrl": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1SlackAlertRequest": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SlackAlertRequestActions"
+          }
+        },
+        "callbackId": {
+          "type": "string"
+        },
+        "team": {
+          "$ref": "#/definitions/SlackAlertRequestTeam"
+        },
+        "channel": {
+          "$ref": "#/definitions/SlackAlertRequestChannel"
+        },
+        "user": {
+          "$ref": "#/definitions/SlackAlertRequestUser"
+        },
+        "actionTs": {
+          "type": "string"
+        },
+        "messageTs": {
+          "type": "string"
+        },
+        "attachmentId": {
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
+        },
+        "isAppUnfurl": {
+          "type": "boolean"
+        },
+        "originalMessage": {
+          "$ref": "#/definitions/SlackAlertRequestOriginal_message"
+        },
+        "responseUrl": {
+          "type": "string"
+        },
+        "triggerId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1SlackAlertResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "bearer": {
+      "type": "apiKey",
+      "description": "Authentication token, prefixed by Bearer: Bearer \u003ctoken\u003e",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "bearer": []
+    }
+  ],
+  "externalDocs": {
+    "description": "gRPC-gateway",
+    "url": "https://github.com/hungtran150/api-app"
+  }
+}

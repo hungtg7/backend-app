@@ -1,0 +1,7 @@
+.vscode
+.github
+
+# Cert file
+*.pem
+*.cert
+*.srl
