@@ -13,81 +13,81 @@ import (
 // is compatible with the grpc package it is being compiled against.
 const _ = grpc.SupportPackageIsVersion7
 
-// AlertServiceClient is the client API for AlertService service.
+// SlackAlertServiceClient is the client API for SlackAlertService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type AlertServiceClient interface {
-	CreateAlertNotification(ctx context.Context, in *SlackAlertRequest, opts ...grpc.CallOption) (*SlackAlertResponse, error)
+type SlackAlertServiceClient interface {
+	CreateButtonAlertNotification(ctx context.Context, in *SlackButtonRequest, opts ...grpc.CallOption) (*SlackButtontResponse, error)
 }
 
-type alertServiceClient struct {
+type slackAlertServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewAlertServiceClient(cc grpc.ClientConnInterface) AlertServiceClient {
-	return &alertServiceClient{cc}
+func NewSlackAlertServiceClient(cc grpc.ClientConnInterface) SlackAlertServiceClient {
+	return &slackAlertServiceClient{cc}
 }
 
-func (c *alertServiceClient) CreateAlertNotification(ctx context.Context, in *SlackAlertRequest, opts ...grpc.CallOption) (*SlackAlertResponse, error) {
-	out := new(SlackAlertResponse)
-	err := c.cc.Invoke(ctx, "/app_data_monitoring.v1.AlertService/CreateAlertNotification", in, out, opts...)
+func (c *slackAlertServiceClient) CreateButtonAlertNotification(ctx context.Context, in *SlackButtonRequest, opts ...grpc.CallOption) (*SlackButtontResponse, error) {
+	out := new(SlackButtontResponse)
+	err := c.cc.Invoke(ctx, "/app_data_monitoring.v1.SlackAlertService/CreateButtonAlertNotification", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// AlertServiceServer is the server API for AlertService service.
-// All implementations should embed UnimplementedAlertServiceServer
+// SlackAlertServiceServer is the server API for SlackAlertService service.
+// All implementations should embed UnimplementedSlackAlertServiceServer
 // for forward compatibility
-type AlertServiceServer interface {
-	CreateAlertNotification(context.Context, *SlackAlertRequest) (*SlackAlertResponse, error)
+type SlackAlertServiceServer interface {
+	CreateButtonAlertNotification(context.Context, *SlackButtonRequest) (*SlackButtontResponse, error)
 }
 
-// UnimplementedAlertServiceServer should be embedded to have forward compatible implementations.
-type UnimplementedAlertServiceServer struct {
+// UnimplementedSlackAlertServiceServer should be embedded to have forward compatible implementations.
+type UnimplementedSlackAlertServiceServer struct {
 }
 
-func (UnimplementedAlertServiceServer) CreateAlertNotification(context.Context, *SlackAlertRequest) (*SlackAlertResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateAlertNotification not implemented")
+func (UnimplementedSlackAlertServiceServer) CreateButtonAlertNotification(context.Context, *SlackButtonRequest) (*SlackButtontResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateButtonAlertNotification not implemented")
 }
 
-// UnsafeAlertServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to AlertServiceServer will
+// UnsafeSlackAlertServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to SlackAlertServiceServer will
 // result in compilation errors.
-type UnsafeAlertServiceServer interface {
-	mustEmbedUnimplementedAlertServiceServer()
+type UnsafeSlackAlertServiceServer interface {
+	mustEmbedUnimplementedSlackAlertServiceServer()
 }
 
-func RegisterAlertServiceServer(s grpc.ServiceRegistrar, srv AlertServiceServer) {
-	s.RegisterService(&_AlertService_serviceDesc, srv)
+func RegisterSlackAlertServiceServer(s grpc.ServiceRegistrar, srv SlackAlertServiceServer) {
+	s.RegisterService(&_SlackAlertService_serviceDesc, srv)
 }
 
-func _AlertService_CreateAlertNotification_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SlackAlertRequest)
+func _SlackAlertService_CreateButtonAlertNotification_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SlackButtonRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AlertServiceServer).CreateAlertNotification(ctx, in)
+		return srv.(SlackAlertServiceServer).CreateButtonAlertNotification(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/app_data_monitoring.v1.AlertService/CreateAlertNotification",
+		FullMethod: "/app_data_monitoring.v1.SlackAlertService/CreateButtonAlertNotification",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AlertServiceServer).CreateAlertNotification(ctx, req.(*SlackAlertRequest))
+		return srv.(SlackAlertServiceServer).CreateButtonAlertNotification(ctx, req.(*SlackButtonRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-var _AlertService_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "app_data_monitoring.v1.AlertService",
-	HandlerType: (*AlertServiceServer)(nil),
+var _SlackAlertService_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "app_data_monitoring.v1.SlackAlertService",
+	HandlerType: (*SlackAlertServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "CreateAlertNotification",
-			Handler:    _AlertService_CreateAlertNotification_Handler,
+			MethodName: "CreateButtonAlertNotification",
+			Handler:    _SlackAlertService_CreateButtonAlertNotification_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

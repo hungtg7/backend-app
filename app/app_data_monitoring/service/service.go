@@ -7,7 +7,7 @@ import (
 )
 
 type Service struct {
-	app_data_monitoring_bp.UnimplementedAlertServiceServer
+	app_data_monitoring_bp.UnimplementedSlackAlertServiceServer
 
 	config     *config.Base
 }
@@ -20,5 +20,5 @@ func NewService(cfg *config.Base,) *Service {
 
 // RegisterWithServer implementing service server interface
 func (s *Service) RegisterWithServer(server *grpc.Server) {
-	app_data_monitoring_bp.RegisterAlertServiceServer(server, s)
+	app_data_monitoring_bp.RegisterSlackAlertServiceServer(server, s)
 }

@@ -3,6 +3,7 @@ package app_data_monitoring.v1;
 
 import "google/api/annotations.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
+import "google/protobuf/any.proto";
 
 option go_package = "github.com/hungtran150/api-app/proto/v1/app_data_monitoring_bp;app_data_monitoring_bp";
 
@@ -34,8 +35,8 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
     schemes: HTTPS;
   };
 
-service AlertService {
-    rpc CreateAlertNotification(SlackAlertRequest) returns (SlackAlertResponse) {
+service SlackAlertService {
+    rpc CreateButtonAlertNotification(SlackButtonRequest) returns (SlackButtontResponse) {
         option (google.api.http) = {
             post: "/api/v1/alert"
             body: "*"
@@ -43,76 +44,62 @@ service AlertService {
     }
 }
 
-message SlackAlertRequest {
+message SlackButtonRequest {
 
-    message Selected_options {
-        string value = 1;
-    }
+  message User {
+      string id = 1;
+      string username = 2;
+      string name = 3;
+      string team_id = 4;
+  }
 
-    message Actions {
-        string name = 1;
-        string type = 2;
-        repeated Selected_options selected_options = 3;
-    }
+  message Container {
+      string type = 1;
+      string text = 2;
+  }
 
-    message Team {
-        string id = 1;
-        string domain = 2;
-    }
+  message Team {
+      string id = 1;
+      string domain = 2;
+  }
 
-    message Channel {
-        string id = 1;
-        string name = 2;
-    }
+  message Values {
+  }
 
-    message User {
-        string id = 1;
-        string name = 2;
-    }
+  message State {
+      Values values = 1;
+  }
 
-    message Actions1 {
-        string id = 1;
-        string name = 2;
-        string text = 3;
-        string type = 4;
-        string data_source = 5;
-    }
+  message Text {
+      string type = 1;
+      string text = 2;
+      bool emoji = 3;
+  }
 
-    message Attachments {
-        string callback_id = 1;
-        string text = 2;
-        uint32 id = 3;
-        string color = 4;
-        repeated Actions1 actions = 5;
-        string fallback = 6;
-    }
+  message Actions {
+      string type = 1;
+      string block_id = 2;
+      string action_id = 3;
+      Text text = 4;
+      string value = 5;
+      string action_ts = 6;
+  }
 
-    message Original_message {
-        string text = 1;
-        string username = 2;
-        string bot_id = 3;
-        repeated Attachments attachments = 4;
-        string type = 5;
-        string subtype = 6;
-        string ts = 7;
-    }
-
-    string type = 1;
-    repeated Actions actions = 2;
-    string callback_id = 3;
-    Team team = 4;
-    Channel channel = 5;
-    User user = 6;
-    string action_ts = 7;
-    string message_ts = 8;
-    string attachment_id = 9;
-    string token = 10;
-    bool is_app_unfurl = 11;
-    Original_message original_message = 12;
-    string response_url = 13;
-    string trigger_id = 14;
+  string type = 1;
+  User user = 2;
+  string api_app_id = 3;
+  string token = 4;
+  Container container = 5;
+  string trigger_id = 6;
+  Team team = 7;
+  google.protobuf.Any enterprise = 8;
+  bool is_enterprise_install = 9;
+  State state = 10;
+  string response_url = 11;
+  repeated Actions actions = 12;
 }
 
-message SlackAlertResponse {
+message SlackButtontResponse {
     int32 code = 1;
+    string message = 2;
 }

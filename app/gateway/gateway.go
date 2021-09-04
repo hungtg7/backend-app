@@ -50,7 +50,7 @@ func Run(dialAddr string) error {
 	gwmux := runtime.NewServeMux()
 	// Register AlertServiceHandler
 	// TODO Refactor RegisterAlertServiceHandler to RegisterAlertServiceHandlerEndPoint
-	err = alert_bp.RegisterAlertServiceHandler(context.Background(), gwmux, conn)
+	err = alert_bp.RegisterSlackAlertServiceHandler(context.Background(), gwmux, conn)
 	if err != nil {
 		return fmt.Errorf("failed to register gateway: %w", err)
 	}
