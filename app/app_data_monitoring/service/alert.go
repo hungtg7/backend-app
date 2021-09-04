@@ -14,7 +14,7 @@ import (
 // Create Alert notification
 func (s *Service) CreateButtonAlertNotification(ctx context.Context, req *app_data_monitoring_bp.SlackButtonRequest) (*app_data_monitoring_bp.SlackButtontResponse, error) {
 	resp := &app_data_monitoring_bp.SlackButtontResponse{}
-	fmt.Println(req)
+	fmt.Println(ctx)
 
 	for _, action := range req.Actions {
 		if action.Value == "no" {
