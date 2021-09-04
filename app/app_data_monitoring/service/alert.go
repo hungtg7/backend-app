@@ -9,7 +9,7 @@ import (
 	"strings"
 
 	
-	"google.golang.org/grpc/codes"
+	// "google.golang.org/grpc/codes"
 	// "google.golang.org/grpc/status"
 	"github.com/hungtran150/api-app/proto/v1/app_data_monitoring_bp"
 )
@@ -56,7 +56,8 @@ func sendSlackAlert(message string, resp *app_data_monitoring_bp.SlackButtontRes
 		return
 	}
 	defer func() {
-		resp.Code = int32(res.StatusCode)
+		// resp.Code = int32(res.StatusCode)
+		fmt.Println(res)
 		resp.Challenge = fmt.Sprintf("%w", err)
 	}()
 	
