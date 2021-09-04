@@ -9,11 +9,6 @@
       "name": "SlackAlertService"
     }
   ],
-  "schemes": [
-    "https",
-
-    "http"
-  ],
   "consumes": [
     "application/json"
   ],
@@ -216,6 +211,9 @@
           "items": {
             "$ref": "#/definitions/SlackButtonRequestActions"
           }
+        },
+        "challenge": {
+          "type": "string"
         }
       }
     },

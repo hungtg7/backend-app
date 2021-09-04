@@ -32,7 +32,6 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
           key: "bearer"
         }
       }
-    schemes: HTTPS;
   };
 
 service SlackAlertService {
@@ -97,6 +96,7 @@ message SlackButtonRequest {
   State state = 10;
   string response_url = 11;
   repeated Actions actions = 12;
+  string challenge = 13;
 }
 
 message SlackButtontResponse {

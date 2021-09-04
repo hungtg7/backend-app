@@ -8,6 +8,9 @@ import (
 	"os"
 	"strings"
 
+	
+	"google.golang.org/grpc/codes"
+	// "google.golang.org/grpc/status"
 	"github.com/hungtran150/api-app/proto/v1/app_data_monitoring_bp"
 )
 
@@ -16,16 +19,18 @@ func (s *Service) CreateButtonAlertNotification(ctx context.Context, req *app_da
 	resp := &app_data_monitoring_bp.SlackButtontResponse{}
 	fmt.Println(ctx)
 
-	for _, action := range req.Actions {
-		if action.Value == "no" {
-			resp.Code = 200
-			resp.Message = "cancle sending"
-			return resp, nil
-		}
-	}
-	messageContent := req.Container.Text
+	// for _, action := range req.Actions {
+	// 	if action.Value == "no" {
+	// 		resp.Code = 200
+	// 		resp.Message = "cancle sending"
+	// 		return resp, nil
+	// 	}
+	// }
+	// messageContent := req.Container.Text
 
-	sendSlackAlert(messageContent, resp)
+	// sendSlackAlert(messageContent, resp)
+	resp.Code = int32(codes.OK)
+	resp.Message = req.Challenge
 
 	return resp, nil
 }
@@ -50,6 +55,9 @@ func sendSlackAlert(message string, resp *app_data_monitoring_bp.SlackButtontRes
 	if err != nil {
 		return
 	}
-	resp.Code = int32(res.StatusCode)
-	resp.Message = "Send to Slack sucessfully"
+	defer func() {
+		resp.Code = int32(res.StatusCode)
+		resp.Message = fmt.Sprintf("%w", err)
+	}()
+	
 }
