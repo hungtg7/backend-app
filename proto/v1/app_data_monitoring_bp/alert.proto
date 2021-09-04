@@ -38,7 +38,7 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
 service SlackAlertService {
     rpc CreateButtonAlertNotification(SlackButtonRequest) returns (SlackButtontResponse) {
         option (google.api.http) = {
-            post: "/api/v1/alert"
+            post: "/api/v1/alert-service"
             body: "*"
           };
     }

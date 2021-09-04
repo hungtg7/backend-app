@@ -11,6 +11,7 @@
   ],
   "schemes": [
     "https",
+
     "http"
   ],
   "consumes": [
@@ -20,7 +21,7 @@
     "application/json"
   ],
   "paths": {
-    "/api/v1/alert": {
+    "/api/v1/alert-service": {
       "post": {
         "operationId": "SlackAlertService_CreateButtonAlertNotification",
         "responses": {

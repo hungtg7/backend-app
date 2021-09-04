@@ -159,7 +159,7 @@ func RegisterSlackAlertServiceHandlerClient(ctx context.Context, mux *runtime.Se
 }
 
 var (
-	pattern_SlackAlertService_CreateButtonAlertNotification_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"api", "v1", "alert"}, ""))
+	pattern_SlackAlertService_CreateButtonAlertNotification_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"api", "v1", "alert-service"}, ""))
 )
 
 var (
