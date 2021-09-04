@@ -224,7 +224,7 @@
           "type": "integer",
           "format": "int32"
         },
-        "message": {
+        "challenge": {
           "type": "string"
         }
       }

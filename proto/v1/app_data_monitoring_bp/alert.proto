@@ -101,5 +101,5 @@ message SlackButtonRequest {
 
 message SlackButtontResponse {
     int32 code = 1;
-    string message = 2;
+    string challenge = 2;
 }

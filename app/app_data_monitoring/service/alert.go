@@ -30,7 +30,7 @@ func (s *Service) CreateButtonAlertNotification(ctx context.Context, req *app_da
 
 	// sendSlackAlert(messageContent, resp)
 	resp.Code = int32(codes.OK)
-	resp.Message = req.Challenge
+	resp.Challenge = req.Challenge
 
 	return resp, nil
 }
@@ -57,7 +57,7 @@ func sendSlackAlert(message string, resp *app_data_monitoring_bp.SlackButtontRes
 	}
 	defer func() {
 		resp.Code = int32(res.StatusCode)
-		resp.Message = fmt.Sprintf("%w", err)
+		resp.Challenge = fmt.Sprintf("%w", err)
 	}()
 	
 }
