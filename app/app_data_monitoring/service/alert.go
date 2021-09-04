@@ -29,7 +29,7 @@ func (s *Service) CreateButtonAlertNotification(ctx context.Context, req *app_da
 	// messageContent := req.Container.Text
 
 	// sendSlackAlert(messageContent, resp)
-	resp.Code = int32(codes.OK)
+	// resp.Code = int32(codes.OK)
 	resp.Challenge = req.Challenge
 
 	return resp, nil

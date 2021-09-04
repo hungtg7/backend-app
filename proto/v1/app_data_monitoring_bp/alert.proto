@@ -100,6 +100,6 @@ message SlackButtonRequest {
 }
 
 message SlackButtontResponse {
-    int32 code = 1;
-    string challenge = 2;
+    // int32 code = 1;
+    string challenge = 1;
 }

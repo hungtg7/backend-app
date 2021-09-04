@@ -220,12 +220,9 @@
     "v1SlackButtontResponse": {
       "type": "object",
       "properties": {
-        "code": {
-          "type": "integer",
-          "format": "int32"
-        },
         "challenge": {
-          "type": "string"
+          "type": "string",
+          "title": "int32 code = 1;"
         }
       }
     }
