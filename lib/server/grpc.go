@@ -8,10 +8,10 @@ import (
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	grpc_auth "github.com/grpc-ecosystem/go-grpc-middleware/auth"
 
-	// "github.com/hungtran150/api-app/ssl"
+	"github.com/hungtran150/api-app/ssl"
 	"github.com/hungtran150/api-app/lib/middleware"
 	"google.golang.org/grpc"
-	// "google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/credentials"
 )
 
 type grpcConfig struct {
@@ -35,7 +35,7 @@ func createDefaultGrpcConfig() *grpcConfig {
 			grpc_middleware.WithUnaryServerChain(
 				grpc_auth.UnaryServerInterceptor(middleware.CustomAuthFunc),
 			),
-			// grpc.Creds(credentials.NewServerTLSFromCert(&ssl.Cert)),
+			grpc.Creds(credentials.NewServerTLSFromCert(&ssl.Cert)),
 		},
 	}
 
@@ -47,7 +47,7 @@ func (c *grpcConfig) ServerOptions() []grpc.ServerOption {
 			grpc_middleware.WithUnaryServerChain(
 				grpc_auth.UnaryServerInterceptor(middleware.CustomAuthFunc),
 			),
-			// grpc.Creds(credentials.NewServerTLSFromCert(&ssl.Cert)),
+			grpc.Creds(credentials.NewServerTLSFromCert(&ssl.Cert)),
 		}
 }
 
