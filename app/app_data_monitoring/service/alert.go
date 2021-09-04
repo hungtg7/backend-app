@@ -2,13 +2,15 @@ package service
 
 import (
 	"context"
-	// "encoding/json"
+	"io/ioutil"
 	"fmt"
 	"net/http"
 	"os"
 	"strings"
 
 	"github.com/hungtran150/api-app/proto/v1/app_data_monitoring_bp"
+	"google.golang.org/grpc/codes"
+	// "google.golang.org/grpc/status"
 )
 
 // Create Alert notification
@@ -18,7 +20,7 @@ func (s *Service) CreateButtonAlertNotification(ctx context.Context, req *app_da
 
 	for _, action := range req.Actions {
 		if action.Value == "no" {
-			resp.Code = 200
+			resp.Code = int32(codes.OK)
 			resp.Message = "cancle sending"
 			return resp, nil
 		}
@@ -50,6 +52,18 @@ func sendSlackAlert(message string, resp *app_data_monitoring_bp.SlackButtontRes
 	if err != nil {
 		return
 	}
+	
+	body, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		return
+	}
+
+	defer func () {
+		resp.Code = int32(res.StatusCode)
+		resp.Message = err.Error()
+	}()
+
 	resp.Code = int32(res.StatusCode)
-	resp.Message = "Send to Slack sucessfully"
+	resp.Message = string(body)
+	res.Body.Close()
 }
