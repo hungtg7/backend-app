@@ -2,8 +2,9 @@ package service
 
 import (
 	"context"
-	"io/ioutil"
 	"fmt"
+	"io/ioutil"
+	"log"
 	"net/http"
 	"os"
 	"strings"
@@ -34,7 +35,11 @@ func (s *Service) CreateButtonAlertNotification(ctx context.Context, req *app_da
 
 // Send Slack notification to external channel
 func sendSlackAlert(message string, resp *app_data_monitoring_bp.SlackButtontResponse) {
-	url := os.Getenv("SLACK_WEB_HOOK")
+	url, exist := os.LookupEnv("SLACK_WEB_HOOK")
+	if !exist {
+		log.Fatal("Please set SLACK_WEB_HOOK env")
+		return
+	}
 	method := "POST"
 	httpErrorFlag := true
 

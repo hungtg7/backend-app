@@ -1,11 +1,13 @@
 # Build stage
-FROM golang AS build-env
-ADD . /src
-ENV CGO_ENABLED=0
-RUN cd /src && go build -o /app
+FROM golang:1.16
+WORKDIR /usr/src
 
-# Production stage
-FROM scratch
-COPY --from=build-env /app /
+COPY . .
 
-ENTRYPOINT ["/app"]
+RUN make install
+RUN make generate
+RUN go build -o . app/app_data_monitoring/main.go 
+
+ENV SLACK_WEB_HOOK=$SLACK_WEB_HOOK
+# ENTRYPOINT ["/bin/bash"]
+EXPOSE 11000
