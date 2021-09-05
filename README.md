@@ -27,3 +27,12 @@ After cloning the repo, there are a couple of initial steps;
 1. Finally, generate the files with `make generate`.
 
 Now you can run the web server with `go run app/app_data_monitoring/main.go`.
+
+## Docker build
+```bash
+docker build --build-arg SLACK_WEB_HOOK=$SLACK_WEB_HOOK -t api-app .
+```
+
+```bash
+docker run --rm -p 11000:11000 -e SLACK_WEB_HOOK=$SLACK_WEB_HOOK api-app ./main
+```
