@@ -1,6 +1,7 @@
 package server
 
 import (
+	"context"
 	"log"
 
 	"google.golang.org/grpc/reflection"
@@ -29,6 +30,9 @@ func New(opts ...Option) (*Server, error) {
 // Serve starts gRPC and Gateway servers.
 func (s *Server) Serve() {
 	go func() {
-		log.Fatal(s.grpcServer.Serve())
+		if err := s.grpcServer.Serve(); err != nil {
+			log.Fatal(err)
+			s.grpcServer.Shutdown(context.Background())
+		}
 	}()
 }
