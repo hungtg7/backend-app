@@ -36,16 +36,17 @@ func (s *Service) CreateButtonAlertNotification(ctx context.Context, req *app_da
 func sendSlackAlert(message string, resp *app_data_monitoring_bp.SlackButtontResponse) {
 	url := os.Getenv("SLACK_WEB_HOOK")
 	method := "POST"
+	httpErrorFlag := true
 
 	payload := strings.NewReader(fmt.Sprintf(`{"text":"%s"}`, message))
 
-	client := &http.Client {
-	}
-	req, err := http.NewRequest(method, url, payload)
+	client := &http.Client{}
 
+	req, err := http.NewRequest(method, url, payload)
 	if err != nil {
 		return
 	}
+
 	req.Header.Add("Content-type", "application/json")
 
 	res, err := client.Do(req)
@@ -59,11 +60,15 @@ func sendSlackAlert(message string, resp *app_data_monitoring_bp.SlackButtontRes
 	}
 
 	defer func () {
-		resp.Code = int32(res.StatusCode)
-		resp.Message = err.Error()
+		if httpErrorFlag {
+			resp.Code = int32(res.StatusCode)
+			resp.Message = err.Error()
+		}
+		
 	}()
 
 	resp.Code = int32(res.StatusCode)
 	resp.Message = string(body)
 	res.Body.Close()
+	httpErrorFlag = false
 }
