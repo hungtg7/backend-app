@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
-	"log"
+	// "log"
 	"os"
 
 	"github.com/hungtran150/api-app/app/app_data_monitoring/config"
