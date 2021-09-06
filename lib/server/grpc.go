@@ -7,8 +7,10 @@ import (
 
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	grpc_auth "github.com/grpc-ecosystem/go-grpc-middleware/auth"
+	grpc_ctxtags "github.com/grpc-ecosystem/go-grpc-middleware/tags"
 
-	// "github.com/hungtran150/api-app/ssl"
+	// // "github.com/hungtran150/api-app/ssl"
+	// "github.com/hungtran150/api-app/lib/logger"
 	"github.com/hungtran150/api-app/lib/middleware"
 	"google.golang.org/grpc"
 	// "google.golang.org/grpc/credentials"
@@ -17,6 +19,7 @@ import (
 type grpcConfig struct {
 	Addr             Listen
 	UnaryServerChain []grpc.ServerOption
+	UnaryServerInterceptor []grpc.UnaryServerInterceptor
 }
 
 // grpcServer wraps grpc.Server setup process.
@@ -34,26 +37,45 @@ func createDefaultGrpcConfig() *grpcConfig {
 		UnaryServerChain: []grpc.ServerOption{
 			grpc_middleware.WithUnaryServerChain(
 				grpc_auth.UnaryServerInterceptor(middleware.CustomAuthFunc),
+				grpc_ctxtags.UnaryServerInterceptor(grpc_ctxtags.WithFieldExtractor(grpc_ctxtags.CodeGenRequestFieldExtractor)),
 			),
-			// grpc.Creds(credentials.NewServerTLSFromCert(&ssl.Cert)),
 		},
 	}
 
 	return config
 }
 
-func (c *grpcConfig) ServerOptions() []grpc.ServerOption {
+func (c *grpcConfig) buildUnaryServerInterceptor() []grpc.UnaryServerInterceptor {
+	var placeHolder []grpc.UnaryServerInterceptor
+	
+	placeHolder = append(
+		placeHolder,
+		grpc_auth.UnaryServerInterceptor(middleware.CustomAuthFunc),
+	)
+	placeHolder = append(
+		placeHolder,
+		grpc_ctxtags.UnaryServerInterceptor(grpc_ctxtags.WithFieldExtractor(grpc_ctxtags.CodeGenRequestFieldExtractor)),
+	)
+	placeHolder = append(
+		placeHolder,
+		c.UnaryServerInterceptor...,
+	)
+	
+
+	return placeHolder
+}
+
+func (c *grpcConfig) serverOptions() []grpc.ServerOption {
 	return []grpc.ServerOption{
 			grpc_middleware.WithUnaryServerChain(
-				grpc_auth.UnaryServerInterceptor(middleware.CustomAuthFunc),
+				c.buildUnaryServerInterceptor()...,
 			),
-			// grpc.Creds(credentials.NewServerTLSFromCert(&ssl.Cert)),
 		}
 }
 
 func newGrpcServer(cfg *grpcConfig, servers []ServiceServer) *grpcServer {
 	s := grpc.NewServer(
-		cfg.ServerOptions()...
+		cfg.serverOptions()...
 	)
 	for _, svr := range servers {
 		svr.RegisterWithServer(s)

@@ -19,14 +19,14 @@ func (s *Service) CreateButtonAlertNotification(ctx context.Context, req *app_da
 	resp := &app_data_monitoring_bp.SlackButtontResponse{}
 	fmt.Println(req)
 
-	for _, action := range req.Actions {
+	for _, action := range req.Payload.Actions {
 		if action.Value == "no" {
 			resp.Code = int32(codes.OK)
 			resp.Message = "cancle sending"
 			return resp, nil
 		}
 	}
-	messageContent := req.Container.Text
+	messageContent := req.Payload.Actions[0].Value
 
 	sendSlackAlert(messageContent, resp)
 

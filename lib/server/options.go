@@ -1,5 +1,7 @@
 package server
 
+import "google.golang.org/grpc"
+
 // Option configures a gRPC and a gateway server.
 type Option func(*Config)
 
@@ -22,5 +24,12 @@ func WithGrpcAddrListen(l Listen) Option {
 func WithServiceServer(srv ...ServiceServer) Option {
 	return func(c *Config) {
 		c.ServiceServers = append(c.ServiceServers, srv...)
+	}
+}
+
+// WithUnaryServerInterceptor
+func WithServerInterceptor(itcts ...grpc.UnaryServerInterceptor) Option {
+	return func(c *Config) {
+		c.Grpc.UnaryServerInterceptor = append(c.Grpc.UnaryServerInterceptor, itcts...)
 	}
 }

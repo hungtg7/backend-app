@@ -56,42 +56,204 @@
     "SlackButtonRequestActions": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string"
         },
-        "blockId": {
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "SlackButtonRequestActions1": {
+      "type": "object",
+      "properties": {
+        "id": {
           "type": "string"
         },
-        "actionId": {
+        "name": {
           "type": "string"
         },
         "text": {
-          "$ref": "#/definitions/SlackButtonRequestText"
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
         },
         "value": {
           "type": "string"
         },
-        "actionTs": {
+        "style": {
           "type": "string"
         }
       }
     },
-    "SlackButtonRequestContainer": {
+    "SlackButtonRequestAttachments": {
       "type": "object",
       "properties": {
+        "callbackId": {
+          "type": "string"
+        },
+        "fallback": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "color": {
+          "type": "string"
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SlackButtonRequestActions1"
+          }
+        }
+      }
+    },
+    "SlackButtonRequestBot_profile": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "deleted": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "updated": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "appId": {
+          "type": "string"
+        },
+        "icons": {
+          "$ref": "#/definitions/SlackButtonRequestIcons"
+        },
+        "teamId": {
+          "type": "string"
+        }
+      }
+    },
+    "SlackButtonRequestChannel": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "SlackButtonRequestIcons": {
+      "type": "object",
+      "properties": {
+        "image36": {
+          "type": "string"
+        },
+        "image48": {
+          "type": "string"
+        },
+        "image72": {
+          "type": "string"
+        }
+      }
+    },
+    "SlackButtonRequestOriginal_message": {
+      "type": "object",
+      "properties": {
+        "botId": {
+          "type": "string"
+        },
         "type": {
           "type": "string"
         },
         "text": {
           "type": "string"
+        },
+        "user": {
+          "type": "string"
+        },
+        "ts": {
+          "type": "string"
+        },
+        "team": {
+          "type": "string"
+        },
+        "botProfile": {
+          "$ref": "#/definitions/SlackButtonRequestBot_profile"
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SlackButtonRequestAttachments"
+          }
         }
       }
     },
-    "SlackButtonRequestState": {
+    "SlackButtonRequestPayload": {
       "type": "object",
       "properties": {
-        "values": {
-          "$ref": "#/definitions/SlackButtonRequestValues"
+        "type": {
+          "type": "string"
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SlackButtonRequestActions"
+          }
+        },
+        "callbackId": {
+          "type": "string"
+        },
+        "team": {
+          "$ref": "#/definitions/SlackButtonRequestTeam"
+        },
+        "channel": {
+          "$ref": "#/definitions/SlackButtonRequestChannel"
+        },
+        "user": {
+          "$ref": "#/definitions/SlackButtonRequestUser"
+        },
+        "actionTs": {
+          "type": "string"
+        },
+        "messageTs": {
+          "type": "string"
+        },
+        "attachmentId": {
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
+        },
+        "isAppUnfurl": {
+          "type": "boolean"
+        },
+        "enterprise": {
+          "$ref": "#/definitions/protobufAny"
+        },
+        "isEnterpriseInstall": {
+          "type": "boolean"
+        },
+        "originalMessage": {
+          "$ref": "#/definitions/SlackButtonRequestOriginal_message"
+        },
+        "responseUrl": {
+          "type": "string"
+        },
+        "triggerId": {
+          "type": "string"
         }
       }
     },
@@ -106,39 +268,16 @@
         }
       }
     },
-    "SlackButtonRequestText": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string"
-        },
-        "text": {
-          "type": "string"
-        },
-        "emoji": {
-          "type": "boolean"
-        }
-      }
-    },
     "SlackButtonRequestUser": {
       "type": "object",
       "properties": {
         "id": {
           "type": "string"
         },
-        "username": {
-          "type": "string"
-        },
         "name": {
-          "type": "string"
-        },
-        "teamId": {
           "type": "string"
         }
       }
-    },
-    "SlackButtonRequestValues": {
-      "type": "object"
     },
     "protobufAny": {
       "type": "object",
@@ -176,44 +315,8 @@
     "v1SlackButtonRequest": {
       "type": "object",
       "properties": {
-        "type": {
-          "type": "string"
-        },
-        "user": {
-          "$ref": "#/definitions/SlackButtonRequestUser"
-        },
-        "apiAppId": {
-          "type": "string"
-        },
-        "token": {
-          "type": "string"
-        },
-        "container": {
-          "$ref": "#/definitions/SlackButtonRequestContainer"
-        },
-        "triggerId": {
-          "type": "string"
-        },
-        "team": {
-          "$ref": "#/definitions/SlackButtonRequestTeam"
-        },
-        "enterprise": {
-          "$ref": "#/definitions/protobufAny"
-        },
-        "isEnterpriseInstall": {
-          "type": "boolean"
-        },
-        "state": {
-          "$ref": "#/definitions/SlackButtonRequestState"
-        },
-        "responseUrl": {
-          "type": "string"
-        },
-        "actions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SlackButtonRequestActions"
-          }
+        "payload": {
+          "$ref": "#/definitions/SlackButtonRequestPayload"
         }
       }
     },
