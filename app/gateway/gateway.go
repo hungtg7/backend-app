@@ -14,7 +14,7 @@ import (
 
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials"
+	// "google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/grpclog"
 
 	alert_bp "github.com/hungtran150/api-app/proto/v1/app_data_monitoring_bp"
@@ -44,7 +44,8 @@ func Run(dialAddr string) error {
 	conn, err := grpc.DialContext(
 		context.Background(),
 		dialAddr,
-		grpc.WithTransportCredentials(credentials.NewClientTLSFromCert(ssl.CertPool, "")),
+		// grpc.WithTransportCredentials(credentials.NewClientTLSFromCert(ssl.CertPool, "")),
+		grpc.WithInsecure(),
 		grpc.WithBlock(),
 	)
 	if err != nil {
