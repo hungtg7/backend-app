@@ -2,11 +2,12 @@ package gateway
 
 import (
 	"bytes"
+	"encoding/json"
 	"io/fs"
+	"io/ioutil"
 	"mime"
 	"net/http"
 	"strings"
-	// "time"
 
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"github.com/hungtran150/api-app/third_party"
@@ -25,68 +26,48 @@ func getOpenAPIHandler() http.Handler {
 	return http.FileServer(http.FS(subFS))
 }
 
-func MainHandler(gwmux *runtime.ServeMux) http.Handler {
-	oa := getOpenAPIHandler()
+func FormWrapper(gwmux *runtime.ServeMux, log *zap.Logger) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		log.Sugar().Debug("Got request: %#v\n", r)
 		if strings.HasPrefix(r.URL.Path, "/api") {
+			if strings.ToLower(strings.Split(r.Header.Get("Content-Type"), ";")[0]) == "application/x-www-form-urlencoded" {
+				convertFormToJson(w, r, log)
+			}
 			gwmux.ServeHTTP(w, r)
 			return
 		}
-		oa.ServeHTTP(w, r)
+		getOpenAPIHandler().ServeHTTP(w, r)
 	})
 }
 
-func AddLogger(logger *zap.Logger, h http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		// Prepare fields to log
-		var scheme string
-		if r.TLS != nil {
-			scheme = "https"
-		} else {
-			scheme = "http"
+func convertFormToJson(w http.ResponseWriter, r *http.Request, log *zap.Logger) {
+	log.Info("Rewriting form data as json")
+	if err := r.ParseForm(); err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		log.Sugar().Error("Bad form request", err.Error())
+		return
+	}
+	bodyMap := make(map[string]interface{}, len(r.Form))
+	for k, v := range r.Form {
+		if len(v) > 0 {
+			bodyMap[k] = v[0]
 		}
-		proto := r.Proto
-		method := r.Method
-		// statusCode := r.Response.StatusCode
-		remoteAddr := r.RemoteAddr
-		userAgent := r.UserAgent()
-		uri := strings.Join([]string{scheme, "://", r.Host, r.RequestURI}, "")
-		body := r.Body
-		buf := new(bytes.Buffer)
-		buf.ReadFrom(body)
-    	bodyString := buf.String()
-		contentType := r.Header.Get("Content-Type")
-		auth := r.Header.Get("Authorization")
-
-
-		// Log HTTP request
-		logger.Debug("request started",
-			// zap.Int("statusCode", statusCode),
-			zap.String("http-scheme", scheme),
-			zap.String("http-proto", proto),
-			zap.String("http-method", method),
-			zap.String("remote-addr", remoteAddr),
-			zap.String("user-agent", userAgent),
-			zap.String("uri", uri),
-			zap.String("content-type", contentType),
-			zap.String("Authorization", auth),
-			zap.String("body", bodyString),
-		)
-
-		// t1 := time.Now()
-
-		h.ServeHTTP(w, r)
-		body.Close()
-
-		// Log HTTP response
-		// logger.Debug("request completed",
-		// 	zap.String("http-scheme", scheme),
-		// 	zap.String("http-proto", proto),
-		// 	zap.String("http-method", method),
-		// 	zap.String("remote-addr", remoteAddr),
-		// 	zap.String("user-agent", userAgent),
-		// 	zap.String("uri", uri),
-		// 	zap.Float64("elapsed-ms", float64(time.Since(t1).Nanoseconds())/1000000.0),
-		// )
-	})
+	}
+	payloadString := bodyMap["payload"].(string)
+	payloadMap := make(map[string]interface{}, len(payloadString))
+	// Convert JSON string to Map
+	err := json.Unmarshal([]byte(payloadString), &payloadMap)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+	}
+	// Convert map to JSON byte
+	jsonBody, err := json.Marshal(payloadMap)
+	
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+	}
+	// Construct new body
+	r.Body = ioutil.NopCloser(bytes.NewReader(jsonBody))
+	r.ContentLength = int64(len(jsonBody))
+	r.Header.Set("Content-Type", "application/json")
 }

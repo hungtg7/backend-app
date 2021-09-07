@@ -44,94 +44,89 @@ service SlackAlertService {
     }
 }
 
+message Actions {
+  string name = 1;
+  string type = 2;
+  string value = 3;
+}
+
+message Team {
+  string id = 1;
+  string domain = 2;
+}
+
+message Channel {
+  string id = 1;
+  string name = 2;
+}
+
+message User {
+  string id = 1;
+  string name = 2;
+}
+
+message Icons {
+  string image_36 = 1;
+  string image_48 = 2;
+  string image_72 = 3;
+}
+
+message Bot_profile {
+  string id = 1;
+  bool deleted = 2;
+  string name = 3;
+  uint32 updated = 4;
+  string app_id = 5;
+  Icons icons = 6;
+  string team_id = 7;
+}
+
+message Actions1 {
+  string id = 1;
+  string name = 2;
+  string text = 3;
+  string type = 4;
+  string value = 5;
+  string style = 6;
+}
+
+message Attachments {
+  string callback_id = 1;
+  string fallback = 2;
+  string text = 3;
+  uint32 id = 4;
+  string color = 5;
+  repeated Actions1 actions = 6;
+}
+
+message Original_message {
+  string bot_id = 1;
+  string type = 2;
+  string text = 3;
+  string user = 4;
+  string ts = 5;
+  string team = 6;
+  Bot_profile bot_profile = 7;
+  repeated Attachments attachments = 8;
+}
+
 message SlackButtonRequest {
-
-  message Actions {
-      string name = 1;
-      string type = 2;
-      string value = 3;
-  }
-
-  message Team {
-      string id = 1;
-      string domain = 2;
-  }
-
-  message Channel {
-      string id = 1;
-      string name = 2;
-  }
-
-  message User {
-      string id = 1;
-      string name = 2;
-  }
-
-  message Icons {
-      string image_36 = 1;
-      string image_48 = 2;
-      string image_72 = 3;
-  }
-
-  message Bot_profile {
-      string id = 1;
-      bool deleted = 2;
-      string name = 3;
-      uint32 updated = 4;
-      string app_id = 5;
-      Icons icons = 6;
-      string team_id = 7;
-  }
-
-  message Actions1 {
-      string id = 1;
-      string name = 2;
-      string text = 3;
-      string type = 4;
-      string value = 5;
-      string style = 6;
-  }
-
-  message Attachments {
-      string callback_id = 1;
-      string fallback = 2;
-      string text = 3;
-      uint32 id = 4;
-      string color = 5;
-      repeated Actions1 actions = 6;
-  }
-
-  message Original_message {
-      string bot_id = 1;
-      string type = 2;
-      string text = 3;
-      string user = 4;
-      string ts = 5;
-      string team = 6;
-      Bot_profile bot_profile = 7;
-      repeated Attachments attachments = 8;
-  }
-
-  message Payload {
-      string type = 1;
-      repeated Actions actions = 2;
-      string callback_id = 3;
-      Team team = 4;
-      Channel channel = 5;
-      User user = 6;
-      string action_ts = 7;
-      string message_ts = 8;
-      string attachment_id = 9;
-      string token = 10;
-      bool is_app_unfurl = 11;
-      google.protobuf.Any enterprise = 12;
-      bool is_enterprise_install = 13;
-      Original_message original_message = 14;
-      string response_url = 15;
-      string trigger_id = 16;
-  }
-
-  Payload payload = 1;
+  string type = 1;
+  repeated Actions actions = 2;
+  string callback_id = 3;
+  Team team = 4;
+  Channel channel = 5;
+  User user = 6;
+  string action_ts = 7;
+  string message_ts = 8;
+  string attachment_id = 9;
+  string token = 10;
+  bool is_app_unfurl = 11;
+  google.protobuf.Any enterprise = 12;
+  bool is_enterprise_install = 13;
+  Original_message original_message = 14;
+  string response_url = 15;
+  string trigger_id = 16;
 }
 
 message SlackButtontResponse {

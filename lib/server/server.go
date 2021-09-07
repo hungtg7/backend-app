@@ -29,6 +29,7 @@ func New(opts ...Option) (*Server, error) {
 
 // Serve starts gRPC and Gateway servers.
 func (s *Server) Serve() {
+	// TODO add signal stop
 	go func() {
 		if err := s.grpcServer.Serve(); err != nil {
 			log.Fatal(err)

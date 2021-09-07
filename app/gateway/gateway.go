@@ -50,7 +50,7 @@ func Run(dialAddr string) error {
 	gatewayAddr := "0.0.0.0:" + port
 	gwServer := &http.Server{
 		Addr: gatewayAddr,
-		Handler: AddLogger(logging.Log, MainHandler(gwmux)),
+		Handler: FormWrapper(gwmux, logging.Log),
 	}
 	// Empty parameters mean use the TLS Config specified with the server.
 	if strings.ToLower(os.Getenv("SERVE_HTTP")) == "true" {

@@ -11,7 +11,6 @@ import (
 
 	"github.com/hungtran150/api-app/proto/v1/app_data_monitoring_bp"
 	"google.golang.org/grpc/codes"
-	// "google.golang.org/grpc/status"
 )
 
 // Create Alert notification
@@ -19,14 +18,14 @@ func (s *Service) CreateButtonAlertNotification(ctx context.Context, req *app_da
 	resp := &app_data_monitoring_bp.SlackButtontResponse{}
 	fmt.Println(req)
 
-	for _, action := range req.Payload.Actions {
+	for _, action := range req.Actions {
 		if action.Value == "no" {
 			resp.Code = int32(codes.OK)
 			resp.Message = "cancle sending"
 			return resp, nil
 		}
 	}
-	messageContent := req.Payload.Actions[0].Value
+	messageContent := req.Actions[0].Value
 
 	sendSlackAlert(messageContent, resp)
 

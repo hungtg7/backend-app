@@ -1,6 +1,5 @@
 generate:
 	buf generate
-	cd ssl; sh ssl-gen.sh
 
 lint:
 	buf lint

@@ -53,232 +53,6 @@
     }
   },
   "definitions": {
-    "SlackButtonRequestActions": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "value": {
-          "type": "string"
-        }
-      }
-    },
-    "SlackButtonRequestActions1": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "text": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "value": {
-          "type": "string"
-        },
-        "style": {
-          "type": "string"
-        }
-      }
-    },
-    "SlackButtonRequestAttachments": {
-      "type": "object",
-      "properties": {
-        "callbackId": {
-          "type": "string"
-        },
-        "fallback": {
-          "type": "string"
-        },
-        "text": {
-          "type": "string"
-        },
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "color": {
-          "type": "string"
-        },
-        "actions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SlackButtonRequestActions1"
-          }
-        }
-      }
-    },
-    "SlackButtonRequestBot_profile": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "deleted": {
-          "type": "boolean"
-        },
-        "name": {
-          "type": "string"
-        },
-        "updated": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "appId": {
-          "type": "string"
-        },
-        "icons": {
-          "$ref": "#/definitions/SlackButtonRequestIcons"
-        },
-        "teamId": {
-          "type": "string"
-        }
-      }
-    },
-    "SlackButtonRequestChannel": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        }
-      }
-    },
-    "SlackButtonRequestIcons": {
-      "type": "object",
-      "properties": {
-        "image36": {
-          "type": "string"
-        },
-        "image48": {
-          "type": "string"
-        },
-        "image72": {
-          "type": "string"
-        }
-      }
-    },
-    "SlackButtonRequestOriginal_message": {
-      "type": "object",
-      "properties": {
-        "botId": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "text": {
-          "type": "string"
-        },
-        "user": {
-          "type": "string"
-        },
-        "ts": {
-          "type": "string"
-        },
-        "team": {
-          "type": "string"
-        },
-        "botProfile": {
-          "$ref": "#/definitions/SlackButtonRequestBot_profile"
-        },
-        "attachments": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SlackButtonRequestAttachments"
-          }
-        }
-      }
-    },
-    "SlackButtonRequestPayload": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string"
-        },
-        "actions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SlackButtonRequestActions"
-          }
-        },
-        "callbackId": {
-          "type": "string"
-        },
-        "team": {
-          "$ref": "#/definitions/SlackButtonRequestTeam"
-        },
-        "channel": {
-          "$ref": "#/definitions/SlackButtonRequestChannel"
-        },
-        "user": {
-          "$ref": "#/definitions/SlackButtonRequestUser"
-        },
-        "actionTs": {
-          "type": "string"
-        },
-        "messageTs": {
-          "type": "string"
-        },
-        "attachmentId": {
-          "type": "string"
-        },
-        "token": {
-          "type": "string"
-        },
-        "isAppUnfurl": {
-          "type": "boolean"
-        },
-        "enterprise": {
-          "$ref": "#/definitions/protobufAny"
-        },
-        "isEnterpriseInstall": {
-          "type": "boolean"
-        },
-        "originalMessage": {
-          "$ref": "#/definitions/SlackButtonRequestOriginal_message"
-        },
-        "responseUrl": {
-          "type": "string"
-        },
-        "triggerId": {
-          "type": "string"
-        }
-      }
-    },
-    "SlackButtonRequestTeam": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "domain": {
-          "type": "string"
-        }
-      }
-    },
-    "SlackButtonRequestUser": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        }
-      }
-    },
     "protobufAny": {
       "type": "object",
       "properties": {
@@ -312,11 +86,207 @@
         }
       }
     },
+    "v1Actions": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "v1Actions1": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "style": {
+          "type": "string"
+        }
+      }
+    },
+    "v1Attachments": {
+      "type": "object",
+      "properties": {
+        "callbackId": {
+          "type": "string"
+        },
+        "fallback": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "color": {
+          "type": "string"
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Actions1"
+          }
+        }
+      }
+    },
+    "v1Bot_profile": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "deleted": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "updated": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "appId": {
+          "type": "string"
+        },
+        "icons": {
+          "$ref": "#/definitions/v1Icons"
+        },
+        "teamId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1Channel": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "v1Icons": {
+      "type": "object",
+      "properties": {
+        "image36": {
+          "type": "string"
+        },
+        "image48": {
+          "type": "string"
+        },
+        "image72": {
+          "type": "string"
+        }
+      }
+    },
+    "v1Original_message": {
+      "type": "object",
+      "properties": {
+        "botId": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        },
+        "user": {
+          "type": "string"
+        },
+        "ts": {
+          "type": "string"
+        },
+        "team": {
+          "type": "string"
+        },
+        "botProfile": {
+          "$ref": "#/definitions/v1Bot_profile"
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Attachments"
+          }
+        }
+      }
+    },
     "v1SlackButtonRequest": {
       "type": "object",
       "properties": {
-        "payload": {
-          "$ref": "#/definitions/SlackButtonRequestPayload"
+        "type": {
+          "type": "string"
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Actions"
+          }
+        },
+        "callbackId": {
+          "type": "string"
+        },
+        "team": {
+          "$ref": "#/definitions/v1Team"
+        },
+        "channel": {
+          "$ref": "#/definitions/v1Channel"
+        },
+        "user": {
+          "$ref": "#/definitions/v1User"
+        },
+        "actionTs": {
+          "type": "string"
+        },
+        "messageTs": {
+          "type": "string"
+        },
+        "attachmentId": {
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
+        },
+        "isAppUnfurl": {
+          "type": "boolean"
+        },
+        "enterprise": {
+          "$ref": "#/definitions/protobufAny"
+        },
+        "isEnterpriseInstall": {
+          "type": "boolean"
+        },
+        "originalMessage": {
+          "$ref": "#/definitions/v1Original_message"
+        },
+        "responseUrl": {
+          "type": "string"
+        },
+        "triggerId": {
+          "type": "string"
         }
       }
     },
@@ -328,6 +298,28 @@
           "format": "int32"
         },
         "message": {
+          "type": "string"
+        }
+      }
+    },
+    "v1Team": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        }
+      }
+    },
+    "v1User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
           "type": "string"
         }
       }
