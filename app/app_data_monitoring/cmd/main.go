@@ -3,15 +3,16 @@ package main
 import (
 	"fmt"
 
+	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
+	"google.golang.org/grpc/codes"
+
 	grpc_zap "github.com/grpc-ecosystem/go-grpc-middleware/logging/zap"
 	"github.com/hungtran150/api-app/app/app_data_monitoring/config"
 	"github.com/hungtran150/api-app/app/app_data_monitoring/service"
 	"github.com/hungtran150/api-app/app/gateway"
 	"github.com/hungtran150/api-app/lib/logging"
 	"github.com/hungtran150/api-app/lib/server"
-	"go.uber.org/zap"
-	"go.uber.org/zap/zapcore"
-	"google.golang.org/grpc/codes"
 )
 
 var (
@@ -20,7 +21,7 @@ var (
 
 func main() {
 	// initialize logger
-	if err := logging.Init(-1, ""); err != nil {
+	if err := logging.Init(0, ""); err != nil {
 		fmt.Errorf("failed to initialize logger: %v", err)
 	}
 	zapOption := []grpc_zap.Option{

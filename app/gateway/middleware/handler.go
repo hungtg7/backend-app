@@ -1,4 +1,4 @@
-package gateway
+package middleware
 
 import (
 	"bytes"
@@ -9,9 +9,10 @@ import (
 	"net/http"
 	"strings"
 
+	"go.uber.org/zap"
+
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"github.com/hungtran150/api-app/third_party"
-	"go.uber.org/zap"
 )
 
 // getOpenAPIHandler serves an OpenAPI UI.
@@ -59,12 +60,16 @@ func convertFormToJson(w http.ResponseWriter, r *http.Request, log *zap.Logger) 
 	err := json.Unmarshal([]byte(payloadString), &payloadMap)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
+		log.Sugar().Error("Bad form request", err.Error())
+		return
 	}
 	// Convert map to JSON byte
 	jsonBody, err := json.Marshal(payloadMap)
 	
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
+		log.Sugar().Error("Bad form request", err.Error())
+		return
 	}
 	// Construct new body
 	r.Body = ioutil.NopCloser(bytes.NewReader(jsonBody))

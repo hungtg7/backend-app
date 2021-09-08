@@ -2,20 +2,17 @@ package gateway
 
 import (
 	"context"
-	"crypto/tls"
 	"fmt"
 	"net/http"
 	"os"
-	"strings"
 
-	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"google.golang.org/grpc"
 
-	// "google.golang.org/grpc/credentials"
 
+	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"github.com/hungtran150/api-app/lib/logging"
+	"github.com/hungtran150/api-app/app/gateway/middleware"
 	alert_bp "github.com/hungtran150/api-app/proto/v1/app_data_monitoring_bp"
-	"github.com/hungtran150/api-app/ssl"
 )
 
 // Run runs the gRPC-Gateway, dialling the provided address.
@@ -50,17 +47,8 @@ func Run(dialAddr string) error {
 	gatewayAddr := "0.0.0.0:" + port
 	gwServer := &http.Server{
 		Addr: gatewayAddr,
-		Handler: FormWrapper(gwmux, logging.Log),
+		Handler: middleware.FormWrapper(gwmux, logging.Log),
 	}
-	// Empty parameters mean use the TLS Config specified with the server.
-	if strings.ToLower(os.Getenv("SERVE_HTTP")) == "true" {
-		log.Info(fmt.Sprint("Serving gRPC-Gateway and OpenAPI Documentation on http://", gatewayAddr))
-		return fmt.Errorf("serving gRPC-Gateway server: %w", gwServer.ListenAndServe())
-	}
-
-	gwServer.TLSConfig = &tls.Config{
-		Certificates: []tls.Certificate{ssl.Cert},
-	}
-	log.Info(fmt.Sprint("Serving gRPC-Gateway and OpenAPI Documentation on https://", gatewayAddr))
-	return fmt.Errorf("serving gRPC-Gateway server use TLS Config: %w", gwServer.ListenAndServeTLS("", ""))
+	log.Info(fmt.Sprint("Serving gRPC-Gateway and OpenAPI Documentation on http://", gatewayAddr))
+	return fmt.Errorf("serving gRPC-Gateway server: %w", gwServer.ListenAndServe())
 }

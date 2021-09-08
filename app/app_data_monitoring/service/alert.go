@@ -2,7 +2,6 @@ package service
 
 import (
 	"context"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -16,18 +15,18 @@ import (
 // Create Alert notification
 func (s *Service) CreateButtonAlertNotification(ctx context.Context, req *app_data_monitoring_bp.SlackButtonRequest) (*app_data_monitoring_bp.SlackButtontResponse, error) {
 	resp := &app_data_monitoring_bp.SlackButtontResponse{}
-	fmt.Println(req)
 
 	for _, action := range req.Actions {
-		if action.Value == "no" {
+		if action.Name == "No" {
 			resp.Code = int32(codes.OK)
-			resp.Message = "cancle sending"
+			resp.Message = "cancel sending"
 			return resp, nil
 		}
 	}
-	messageContent := req.Actions[0].Value
+	content := req.Actions[0].Value
+	
 
-	sendSlackAlert(messageContent, resp)
+	sendSlackAlert(content, resp)
 
 	return resp, nil
 }
@@ -42,7 +41,7 @@ func sendSlackAlert(message string, resp *app_data_monitoring_bp.SlackButtontRes
 	method := "POST"
 	httpErrorFlag := true
 
-	payload := strings.NewReader(fmt.Sprintf(`{"text":"%s"}`, message))
+	payload := strings.NewReader(message)
 
 	client := &http.Client{}
 
