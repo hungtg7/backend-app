@@ -8,9 +8,29 @@ import (
 	"os"
 	"strings"
 
+	"github.com/hungtg7/api-app/app/pet/config"
+	petv1 "github.com/hungtg7/api-app/proto/pet"
 	"github.com/hungtran150/api-app/proto/v1/app_data_monitoring_bp"
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 )
+
+type Service struct {
+	petv1.UnimplementedPetStoreServer
+
+	config *config.Base
+}
+
+func NewService(cfg *config.Base) *Service {
+	return &Service{
+		config: cfg,
+	}
+}
+
+// RegisterWithServer implementing service server interface
+func (s *Service) RegisterWithServer(server *grpc.Server) {
+	petv1.RegisterPetStoreServer(server, s)
+}
 
 // Create Alert notification
 func (s *Service) CreateButtonAlertNotification(ctx context.Context, req *app_data_monitoring_bp.SlackButtonRequest) (*app_data_monitoring_bp.SlackButtontResponse, error) {
@@ -24,7 +44,6 @@ func (s *Service) CreateButtonAlertNotification(ctx context.Context, req *app_da
 		}
 	}
 	content := req.Actions[0].Value
-	
 
 	sendSlackAlert(content, resp)
 
@@ -56,18 +75,18 @@ func sendSlackAlert(message string, resp *app_data_monitoring_bp.SlackButtontRes
 	if err != nil {
 		return
 	}
-	
+
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
 		return
 	}
 
-	defer func () {
+	defer func() {
 		if httpErrorFlag {
 			resp.Code = int32(res.StatusCode)
 			resp.Message = err.Error()
 		}
-		
+
 	}()
 
 	resp.Code = int32(res.StatusCode)
