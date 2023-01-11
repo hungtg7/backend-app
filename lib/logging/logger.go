@@ -5,8 +5,10 @@ import (
 	"sync"
 	"time"
 
+	grpc_zap "github.com/grpc-ecosystem/go-grpc-middleware/logging/zap"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
+	"google.golang.org/grpc/codes"
 )
 
 var (
@@ -35,6 +37,10 @@ func Init(lvl int, timeFormat string) error {
 	onceInit.Do(func() {
 		// First, define our level-handling logic.
 		globalLevel := zapcore.Level(lvl)
+		// zap option
+		zapOption := []grpc_zap.Option{
+			grpc_zap.WithLevels(codeToLevel),
+		}
 
 		// High-priority output should also go to standard error, and low-priority
 		// output should also go to standard out.
@@ -68,7 +74,7 @@ func Init(lvl int, timeFormat string) error {
 		)
 
 		// From a zapcore.Core, it's easy to construct a Logger.
-		Log = zap.New(core)
+		Log = zap.New(core, zapOption)
 		zap.RedirectStdLog(Log)
 
 		if !useCustomTimeFormat {
@@ -77,4 +83,14 @@ func Init(lvl int, timeFormat string) error {
 	})
 
 	return err
+}
+
+// codeToLevel redirects OK to DEBUG level logging instead of INFO
+// This is example how you can log several gRPC code results
+func codeToLevel(code codes.Code) zapcore.Level {
+	if code == codes.OK {
+		// It is DEBUG
+		return zap.DebugLevel
+	}
+	return grpc_zap.DefaultCodeToLevel(code)
 }

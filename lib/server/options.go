@@ -21,9 +21,9 @@ func WithGrpcAddrListen(l Listen) Option {
 }
 
 // WithServiceServer
-func WithServiceServer(srv ...ServiceServer) Option {
+func WithServiceServer(srv ServiceServer) Option {
 	return func(c *Config) {
-		c.ServiceServers = append(c.ServiceServers, srv...)
+		c.ServiceServer = srv
 	}
 }
 

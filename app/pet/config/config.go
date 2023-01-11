@@ -1,8 +1,6 @@
 package config
 
-import (
-	"github.com/hungtran150/api-app/lib/server"
-)
+import "github.com/hungtg7/api-app/lib/server"
 
 // config base
 
@@ -30,8 +28,8 @@ func AppServerConfig() ServerConfig {
 
 // Config ...
 type Base struct {
-	Env         string       `json:"env" mapstructure:"env"`
-	Server      ServerConfig `json:"server" mapstructure:"server"`
+	Env    string       `json:"env" mapstructure:"env"`
+	Server ServerConfig `json:"server" mapstructure:"server"`
 }
 
 func (b Base) IsDevelopment() bool {
