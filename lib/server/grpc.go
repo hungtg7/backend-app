@@ -8,13 +8,13 @@ import (
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	grpc_auth "github.com/grpc-ecosystem/go-grpc-middleware/auth"
 	grpc_ctxtags "github.com/grpc-ecosystem/go-grpc-middleware/tags"
-	"github.com/hungtran150/api-app/lib/middleware"
+	"github.com/hungtg7/api-app/lib/middleware"
 	"google.golang.org/grpc"
 )
 
 type grpcConfig struct {
-	Addr             Listen
-	UnaryServerChain []grpc.ServerOption
+	Addr                   Listen
+	UnaryServerChain       []grpc.ServerOption
 	UnaryServerInterceptor []grpc.UnaryServerInterceptor
 }
 
@@ -43,7 +43,7 @@ func createDefaultGrpcConfig() *grpcConfig {
 
 func (c *grpcConfig) buildUnaryServerInterceptor() []grpc.UnaryServerInterceptor {
 	var placeHolder []grpc.UnaryServerInterceptor
-	
+
 	placeHolder = append(
 		placeHolder,
 		grpc_auth.UnaryServerInterceptor(middleware.CustomAuthFunc),
@@ -56,26 +56,25 @@ func (c *grpcConfig) buildUnaryServerInterceptor() []grpc.UnaryServerInterceptor
 		placeHolder,
 		c.UnaryServerInterceptor...,
 	)
-	
 
 	return placeHolder
 }
 
 func (c *grpcConfig) serverOptions() []grpc.ServerOption {
 	return []grpc.ServerOption{
-			grpc_middleware.WithUnaryServerChain(
-				c.buildUnaryServerInterceptor()...,
-			),
-		}
+		grpc_middleware.WithUnaryServerChain(
+			c.buildUnaryServerInterceptor()...,
+		),
+	}
 }
 
-func newGrpcServer(cfg *grpcConfig, servers []ServiceServer) *grpcServer {
+func newGrpcServer(cfg *grpcConfig, server ServiceServer) *grpcServer {
 	s := grpc.NewServer(
-		cfg.serverOptions()...
+		cfg.serverOptions()...,
 	)
-	for _, svr := range servers {
-		svr.RegisterWithServer(s)
-	}
+
+	server.RegisterWithServer(s)
+
 	return &grpcServer{
 		server: s,
 		config: cfg,

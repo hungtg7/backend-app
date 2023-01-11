@@ -18,7 +18,6 @@ func (l Listen) String() string {
 func createDefaultConfig() *Config {
 	config := &Config{
 		Grpc: createDefaultGrpcConfig(),
-		// TODO - add Gateway (HTTP server) later when in need
 	}
 
 	return config
@@ -33,6 +32,6 @@ func (l *Listen) CreateListener() (net.Listener, error) {
 }
 
 type Config struct {
-	Grpc           *grpcConfig
-	ServiceServers []ServiceServer
+	Grpc          *grpcConfig
+	ServiceServer ServiceServer
 }
