@@ -2,14 +2,36 @@ package repo
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/hungtg7/api-app/app/pet/entity"
 	"gorm.io/gorm"
 )
 
-type PetRepo struct{ db *gorm.DB }
+type PetRepo struct{ Db *gorm.DB }
 
-func (r *PetRepo) GetPetByID(ctx context.Context, Id string) (*entity.Pet, error) {
-	return nil, fmt.Errorf("error")
+func New(db *gorm.DB) *PetRepo { return &PetRepo{db} }
+
+func (r *PetRepo) GetPetByID(ctx context.Context, id string) (*entity.Pet, error) {
+	var pet *entity.Pet
+
+	query := r.Db
+
+	if err := query.Where("id = ?", id).First(&pet).Error; err != nil {
+		return nil, err
+	}
+
+	return pet, nil
+}
+
+// Add adds new Pet to repo.
+func (r *PetRepo) Add(ctx context.Context, items ...*entity.Pet) error {
+	r.Db.CreateBatchSize = 100
+	for _, item := range items {
+		if err := r.Db.Create(item).Error; err != nil {
+			return err
+		}
+	}
+
+	r.Db.CreateBatchSize = 0
+	return nil
 }

@@ -6,8 +6,9 @@ import (
 
 // ProductCategory entity.
 type Pet struct {
-	ID   string `gorm:"primaryKey;column:id"`
-	Name string `gorm:"column:name"`
+	ID      int32  `gorm:"primaryKey;auto_increment;column:id"`
+	Name    string `gorm:"column:name"`
+	PetType string `gorm:"column:pet_type"`
 
 	CreatedAt time.Time `gorm:"column:created_at;autoCreateTime"`
 	UpdatedAt time.Time `gorm:"column:updated_at"`
