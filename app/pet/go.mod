@@ -2,8 +2,6 @@ module github.com/hungtg7/api-app/app/pet
 
 go 1.18
 
-// replace github.com/hungtg7/api-app => ../../../api-app
-
 require (
 	github.com/grpc-ecosystem/go-grpc-middleware v1.3.0
 	google.golang.org/grpc v1.52.0
@@ -14,6 +12,7 @@ require (
 
 require (
 	github.com/golang/protobuf v1.5.2 // indirect
+	github.com/hungtg7/api-app v0.0.0-20230118173708-0c506e459403 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20221227161230-091c0ba34f0a // indirect
 	github.com/jackc/pgx/v5 v5.2.0 // indirect

@@ -11,8 +11,7 @@ import (
 	"github.com/hungtg7/api-app/app/pet/repo"
 	"github.com/hungtg7/api-app/app/pet/service"
 	"github.com/hungtg7/api-app/lib/logging"
-	server "github.com/hungtg7/api-app/lib/server/grpc"
-
+	"github.com/hungtg7/api-app/lib/server/grpc"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
 )
@@ -45,10 +44,10 @@ func main() {
 
 	repo := &repo.PetRepo{Db: db}
 	petServer := service.NewService(cfg, repo)
-	server, err := server.New(
-		server.WithGrpcAddrListen(cfg.Server.GRPC),
-		server.WithServiceServer(petServer),
-		server.WithServerInterceptor(
+	server, err := grpc.New(
+		grpc.WithGrpcAddrListen(cfg.Server.GRPC),
+		grpc.WithServiceServer(petServer),
+		grpc.WithServerInterceptor(
 			grpc_zap.UnaryServerInterceptor(logging.Log),
 		),
 	)

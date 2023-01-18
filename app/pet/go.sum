@@ -35,6 +35,10 @@ github.com/grpc-ecosystem/go-grpc-middleware v1.3.0 h1:+9834+KizmvFV7pXQGSXQTsaW
 github.com/grpc-ecosystem/go-grpc-middleware v1.3.0/go.mod h1:z0ButlSOZa5vEBq9m2m2hlwIgKw+rp3sdCBRoJY+30Y=
 github.com/hungtg7/api-app v0.0.0-20230115180153-eb6070b4699f h1:atOIv4eRbqdgBt8dtseqzurCa3kJaYE2khWDbJkcX5E=
 github.com/hungtg7/api-app v0.0.0-20230115180153-eb6070b4699f/go.mod h1:FccYyyWSaQIncejoCPFemJlV7oglQ56ylxuVvLn2eog=
+github.com/hungtg7/api-app v0.0.0-20230118172327-ae7f43c7a33f h1:36yXwEKz4wAVsocECikyVkmUvGVYI3AzKPsv/3nzCVQ=
+github.com/hungtg7/api-app v0.0.0-20230118172327-ae7f43c7a33f/go.mod h1:Z002curQsqQ5R4obB5zeMtNNPde83hj229izOiaWGhI=
+github.com/hungtg7/api-app v0.0.0-20230118173708-0c506e459403 h1:mFPlPPlrFmrw+cYwbJ0iA96McNbxtEATyk/LM4Cld9g=
+github.com/hungtg7/api-app v0.0.0-20230118173708-0c506e459403/go.mod h1:n8Ls8AYhQ0ot3CtbViLGOS4gaMiLAl4vWGQ1xRAdg2g=
 github.com/jackc/pgpassfile v1.0.0 h1:/6Hmqy13Ss2zCq62VdNG8tM1wchn8zjSGOBJ6icpsIM=
 github.com/jackc/pgpassfile v1.0.0/go.mod h1:CEx0iS5ambNFdcRtxPj5JhEz+xB6uRky5eyVu/W2HEg=
 github.com/jackc/pgservicefile v0.0.0-20200714003250-2b9c44734f2b/go.mod h1:vsD4gTJCa9TptPL8sPkXrLZ+hDuNrZCnj29CQpr4X1E=
