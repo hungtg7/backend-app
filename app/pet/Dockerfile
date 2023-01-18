@@ -2,11 +2,12 @@
 FROM golang:1.18
 WORKDIR /usr/src
 
-COPY . .
+COPY lib/ .
+COPY app/pet .
+COPY Makefile .
 
-RUN make install
-RUN make generate
-RUN go build -o . app/pet/main.go 
+# RUN make generate
+ENV GOROOT=/usr/src
+RUN go build -o . cmd/main.go 
 
 # ENTRYPOINT ["/bin/bash"]
-EXPOSE 11000
