@@ -2,12 +2,12 @@ module github.com/hungtg7/api-app/app/pet
 
 go 1.18
 
-replace github.com/hungtg7/api-app => ../../
+replace github.com/hungtg8/api-app => ../../
 
 require (
 	github.com/grpc-ecosystem/go-grpc-middleware v1.3.0
-	github.com/hungtg7/api-app v0.0.0-00010101000000-000000000000
 	google.golang.org/grpc v1.52.0
+	gorm.io/driver/postgres v1.4.6
 	gorm.io/gorm v1.24.3
 )
 

@@ -1,6 +1,8 @@
 package config
 
-import "github.com/hungtg7/api-app/lib/server"
+import (
+	"github.com/hungtg7/api-app/lib/server/grpc"
+)
 
 // config base
 
@@ -13,13 +15,13 @@ const (
 
 // Config hold http/grpc server config
 type ServerConfig struct {
-	GRPC server.Listen `json:"grpc" mapstructure:"grpc"`
+	GRPC grpc.Listen `json:"grpc" mapstructure:"grpc"`
 }
 
 // DefaultServerConfig return a default server config
 func AppServerConfig() ServerConfig {
 	return ServerConfig{
-		GRPC: server.Listen{
+		GRPC: grpc.Listen{
 			Host: "0.0.0.0",
 			Port: 10550,
 		},
