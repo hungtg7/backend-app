@@ -2,10 +2,11 @@ module github.com/hungtg7/api-app/app/pet
 
 go 1.18
 
-replace github.com/hungtg8/api-app => ../../
+// replace github.com/hungtg7/api-app => ../../../api-app
 
 require (
 	github.com/grpc-ecosystem/go-grpc-middleware v1.3.0
+	github.com/hungtg7/api-app v0.0.0-20230115180153-eb6070b4699f
 	google.golang.org/grpc v1.52.0
 	google.golang.org/protobuf v1.28.1
 	gorm.io/driver/postgres v1.4.6
@@ -23,8 +24,8 @@ require (
 	go.uber.org/multierr v1.6.0 // indirect
 	go.uber.org/zap v1.24.0 // indirect
 	golang.org/x/crypto v0.4.0 // indirect
-	golang.org/x/net v0.4.0 // indirect
-	golang.org/x/sys v0.3.0 // indirect
-	golang.org/x/text v0.5.0 // indirect
+	golang.org/x/net v0.5.0 // indirect
+	golang.org/x/sys v0.4.0 // indirect
+	golang.org/x/text v0.6.0 // indirect
 	google.golang.org/genproto v0.0.0-20230110181048-76db0878b65f // indirect
 )
