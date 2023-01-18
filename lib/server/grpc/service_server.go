@@ -1,4 +1,4 @@
-package server
+package grpc
 
 import (
 	"golang.org/x/net/context"
