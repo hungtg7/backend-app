@@ -11,7 +11,8 @@ import (
 	"github.com/hungtg7/api-app/app/pet/repo"
 	"github.com/hungtg7/api-app/app/pet/service"
 	"github.com/hungtg7/api-app/lib/logging"
-	server "github.com/hungtg7/api-app/lib/server/grpc"
+	server "github.com/hungtg7/api-app/lib/server"
+
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
 )
