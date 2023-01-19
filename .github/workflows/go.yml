@@ -8,6 +8,8 @@ jobs:
     - name: debug
       run: pwd & ls ./app
     - name: Docker Build
+      working-directory: api-app
       run: docker build -t local -f ./app/pet/Dockerfile .
     - name: Docker Run
+      working-directory: api-app
       run: docker run -rm local
