@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: debug
-      run: pwd & ls ./app
+      run: pwd & ls
     - name: Docker Build
       working-directory: api-app
       run: docker build -t local -f ./app/pet/Dockerfile .
