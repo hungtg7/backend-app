@@ -1,15 +1,12 @@
-name: Go
+name: pet.yaml
+run-name: ${{ github.actor }} is running pet workflow
 on: [push]
 jobs:
   build:
-    name: Build-Pet
     runs-on: ubuntu-latest
     steps:
-    - name: debug
-      run: pwd & ls
-    - name: Docker Build
-      working-directory: api-app
-      run: docker build -t local -f ./app/pet/Dockerfile .
-    - name: Docker Run
-      working-directory: api-app
-      run: docker run -rm local
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v3
+        with:
+          go-version: '1.19'
+      - run: go build app/pet/cmd/main.go
