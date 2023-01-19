@@ -2,10 +2,10 @@ name: Go
 on: [push]
 jobs:
   build:
-    name: Build
+    name: Build-Pet
     runs-on: ubuntu-latest
     steps:
     - name: Docker Build
-      run: docker build -t local -f ./Dockerfile .
+      run: docker build -t local -f /app/pet/Dockerfile .
     - name: Docker Run
       run: docker run -rm local
