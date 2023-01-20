@@ -33,7 +33,6 @@ func New(opts ...Option) (*Server, error) {
 
 // Serve starts gRPC and Gateway servers.
 func (s *Server) Serve() error {
-	// TODO add signal stop (Grateful shutdown)
 	stop := make(chan os.Signal, 1)
 	errch := make(chan error)
 	signal.Notify(stop, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
