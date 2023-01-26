@@ -2,6 +2,7 @@ package restapi
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -18,21 +19,22 @@ type Server struct {
 	mux        *mux.Router
 }
 
-func New() *Server {
+func New(add string) *Server {
 	return &Server{
+		Add: add,
 		mux: mux.NewRouter(),
 	}
 }
 
 type HandleFunc struct {
-	pattern string
-	handler func(http.ResponseWriter, *http.Request)
-	method  []string
+	Pattern string
+	Handler func(http.ResponseWriter, *http.Request)
+	Method  []string
 }
 
 func (s *Server) RegisterHandleFunc(function ...HandleFunc) {
 	for _, f := range function {
-		s.mux.HandleFunc(f.pattern, f.handler).Methods(f.method...)
+		s.mux.HandleFunc(f.Pattern, f.Handler).Methods(f.Method...)
 	}
 }
 
@@ -41,6 +43,7 @@ func (s *Server) Serve() error {
 	stop := make(chan os.Signal, 1)
 	errch := make(chan error)
 	signal.Notify(stop, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
+	fmt.Println("Listening")
 	go func() {
 		if err := http.ListenAndServe(s.Add, s.mux); err != nil {
 			log.Fatal(err)

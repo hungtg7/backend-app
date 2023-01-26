@@ -11,15 +11,13 @@ const (
 
 // Config hold http/grpc server config
 type ServerConfig struct {
-	Host string
-	Port int
+	Add string
 }
 
 // DefaultServerConfig return a default server config
 func AppServerConfig() ServerConfig {
 	return ServerConfig{
-		Host: "0.0.0.0",
-		Port: 10550,
+		Add: "0.0.0.0:8888",
 	}
 }
 

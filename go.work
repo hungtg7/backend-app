@@ -1,6 +1,7 @@
 go 1.18
 
 use (
-./app/pet
-./lib
+	./app/order
+	./app/pet
+	./lib
 )
