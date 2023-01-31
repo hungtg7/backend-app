@@ -12,3 +12,15 @@ services:
       start_period: 80s
     ports:
       - "5432:5432"
+  nginx:
+    image: nginx:latest 
+    restart: always
+    volumes:
+      - ./app/api_gateway/nginx/conf.d:/etc/nginx/conf.d
+    ports:
+      - "8888:8888"
+  # order:
+  #   build: 
+
+
+
