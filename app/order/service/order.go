@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"os"
 	"strings"
 
 	"github.com/hungtg7/api-app/app/order/config"
@@ -35,6 +36,8 @@ func (s *Service) GetOrder(ctx context.Context) func(w http.ResponseWriter, r *h
 			fmt.Println("filters not present")
 		}
 		w.WriteHeader(200)
+		hostname, _ := os.Hostname()
+		filters = append(filters, hostname)
 		w.Write([]byte(strings.Join(filters, ",")))
 	}
 }

@@ -4,7 +4,9 @@ WORKDIR /usr/src
 
 COPY lib/ .
 COPY app/order .
-COPY Makefile .
+
+RUN go mod download
+RUN go build -o . cmd/main.go 
 
 ENTRYPOINT ["/bin/bash","./entrypoint.sh"]
 

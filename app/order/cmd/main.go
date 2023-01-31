@@ -26,7 +26,7 @@ func main() {
 
 	var connectStr = fmt.Sprintf(
 		"host=%s user=%s password=%s dbname=%s port=%s",
-		"192.168.1.7",
+		"postgres",
 		"postgres",
 		"postgres",
 		"postgres",

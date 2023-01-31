@@ -15,12 +15,20 @@ services:
   nginx:
     image: nginx:latest 
     restart: always
+    depends_on:
+     - order
     volumes:
       - ./app/api_gateway/nginx/conf.d:/etc/nginx/conf.d
     ports:
-      - "8888:8888"
-  # order:
-  #   build: 
+      - "8080:8080"
+  order:
+    build:
+      context: .
+      dockerfile: app/order/Dockerfile 
+    restart: always
+    depends_on:
+      postgres:
+        condition: service_healthy
 
 
 
