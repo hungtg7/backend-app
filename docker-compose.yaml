@@ -29,6 +29,13 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-
+  pet:
+    build:
+      context: .
+      dockerfile: app/pet/Dockerfile 
+    restart: always
+    depends_on:
+      postgres:
+        condition: service_healthy
 
 
