@@ -21,6 +21,7 @@ services:
       - ./app/api_gateway/nginx/conf.d:/etc/nginx/conf.d
     ports:
       - "8080:8080"
+      - "50002:50002"
   order:
     build:
       context: .

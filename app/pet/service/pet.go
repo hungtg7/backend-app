@@ -2,14 +2,13 @@ package service
 
 import (
 	"context"
-	"fmt"
+	"strconv"
 
 	"github.com/hungtg7/api-app/app/pet/config"
 	"github.com/hungtg7/api-app/app/pet/entity"
 	"github.com/hungtg7/api-app/app/pet/repo"
 	petv1 "github.com/hungtg7/api-app/proto/pet"
 	"google.golang.org/grpc"
-	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 type Service struct {
@@ -36,15 +35,20 @@ func (s *Service) Close(ctx context.Context) {
 }
 
 func (s *Service) GetPet(ctx context.Context, req *petv1.GetPetRequest) (*petv1.GetPetResponse, error) {
-	var resp *petv1.GetPetResponse
-	pet, err := s.repo.GetPetByID(ctx, req.GetPetId())
+	resp := &petv1.GetPetResponse{}
+	// pet, err := s.repo.GetPetByID(ctx, req.GetPetId())
+	// if err != nil {
+	// 	return nil, err
+	// }
+	// Serializing the struct and assigning it to body
+	// p1 := &petv1.Pet{PetType: pet.PetType, Id: pet.ID, CreatedAt: timestamppb.New(pet.CreatedAt)}
+	id, err := strconv.Atoi(req.GetPetId())
 	if err != nil {
 		return nil, err
 	}
-	// Serializing the struct and assigning it to body
-	p1 := &petv1.Pet{PetType: pet.PetType, Id: pet.ID, CreatedAt: timestamppb.New(pet.CreatedAt)}
+	p1 := &petv1.Pet{Id: int32(id)}
 	resp.Pet = p1
-	return nil, fmt.Errorf("error")
+	return resp, nil
 }
 
 func (s *Service) CreatePet(ctx context.Context, req *petv1.CreatePetRequest) (*petv1.CreatePetResponse, error) {
