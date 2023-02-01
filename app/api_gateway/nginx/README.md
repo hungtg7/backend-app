@@ -5,6 +5,8 @@ Basic config in conf.d folder for order application
 
 Default LoadBallancing is Round robin
 
-TODO: Test other load LoadBallancing
+TODO: Test other load LoadBallancing Algo
+
 TODO: ADD authentication
-TODO: Proxy to GRPC?
+
+TODO: limit request
