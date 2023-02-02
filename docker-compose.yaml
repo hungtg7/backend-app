@@ -1,3 +1,16 @@
+x-kong-config: &kong-env
+  KONG_DATABASE: "off"
+  # KONG_PG_HOST: kong-db
+  # KONG_PG_USER: kong
+  # KONG_PG_PASSWORD: kong
+  KONG_PROXY_ACCESS_LOG: /dev/stdout
+  KONG_ADMIN_ACCESS_LOG: /dev/stdout
+  KONG_PROXY_ERROR_LOG: /dev/stderr
+  KONG_ADMIN_ERROR_LOG: /dev/stderr
+  KONG_ADMIN_LISTEN: 0.0.0.0:8001
+  KONG_ADMIN_GUI_URL: http://localhost:8002
+  KONG_DECLARATIVE_CONFIG: /opt/kong/kong.yaml
+
 services:
   postgres:
     image: postgres:14
@@ -10,18 +23,66 @@ services:
       timeout: 60s
       retries: 5
       start_period: 80s
-    ports:
-      - "5432:5432"
-  nginx:
-    image: nginx:latest 
+  # kong-db:
+  #   image: postgres:14
+  #   restart: always
+  #   environment:
+  #     POSTGRES_DB: kong
+  #     POSTGRES_USER: kong
+  #     POSTGRES_PASSWORD: kong
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "pg_isready", "-d", "postgres"]
+  #     interval: 30s
+  #     timeout: 60s
+  #     retries: 5
+  #     start_period: 80s
+  # nginx:
+  #   image: nginx:latest 
+  #   restart: always
+  #   depends_on:
+  #    - order
+  #   volumes:
+  #     - ./app/api_gateway/nginx/conf.d:/etc/nginx/conf.d
+  #   ports:
+  #     - "8080:8080"
+  #     - "50002:50002"
+  kong:
+    image: kong/kong-gateway:latest 
     restart: always
+    platform: linux/amd64
     depends_on:
-     - order
+    - postgres
+    - order
+    environment:
+      <<: *kong-env
     volumes:
-      - ./app/api_gateway/nginx/conf.d:/etc/nginx/conf.d
+      - ./app/api_gateway/kong:/opt/kong
+    command: "kong start"
     ports:
-      - "8080:8080"
-      - "50002:50002"
+      - "8002:8002"
+      - "8001:8001"
+      - "8000:8000"
+
+  # kong-migrations:
+  #   image: kong/kong-gateway:latest 
+  #   command: kong migrations bootstrap
+  #   platform: linux/amd64
+  #   depends_on:
+  #     - postgres
+  #   environment:
+  #     <<: *kong-env
+  #   restart: on-failure
+  #
+  # kong-migrations-up:
+  #   image: kong/kong-gateway:latest
+  #   command: kong migrations up && kong migrations finish
+  #   platform: linux/amd64
+  #   depends_on:
+  #     - postgres
+  #   environment:
+  #     <<: *kong-env
+  #   restart: on-failure
+
   order:
     build:
       context: .
@@ -30,6 +91,8 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+    ports:
+      - "8888:8888"
   pet:
     build:
       context: .
