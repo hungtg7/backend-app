@@ -1,0 +1,12 @@
+ _format_version: "3.0"
+ _transform: true
+
+ services:
+ - name: order_service
+   url: http://order:8888/order
+   protocol: http
+   routes:
+   - name: order_route
+     paths:
+     - /order
+     strip_path: true
