@@ -1,0 +1,6 @@
+[submodule "proto_old/proto_file"]
+	path = proto_old/proto_file
+	url = git@github.com:hungtg7/proto_file.git
+[submodule "proto_file"]
+	path = proto_file
+	url = git@github.com:hungtg7/proto_file.git
