@@ -7,7 +7,7 @@ import (
 	"github.com/hungtg7/api-app/app/pet/config"
 	"github.com/hungtg7/api-app/app/pet/entity"
 	"github.com/hungtg7/api-app/app/pet/repo"
-	petv1 "github.com/hungtg7/api-app/proto/pet"
+	petv1 "github.com/hungtg7/api-app/pkg/proto_file/pet"
 	"google.golang.org/grpc"
 )
 
