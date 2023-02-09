@@ -7,8 +7,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/hungtg7/api-app/app/order/config"
-	"github.com/hungtg7/api-app/app/order/repo"
+	"github.com/hungtg7/backend-app/app/order/config"
+	"github.com/hungtg7/backend-app/app/order/repo"
 )
 
 type Service struct {

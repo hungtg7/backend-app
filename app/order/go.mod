@@ -1,9 +1,9 @@
-module github.com/hungtg7/api-app/app/order
+module github.com/hungtg7/backend-app/app/order
 
 go 1.18
 
 require (
-	github.com/hungtg7/api-app/lib v0.0.0-20230128162544-5a4a83ee5840
+	github.com/hungtg7/backend-app/lib v0.0.0-20230209171513-2bc4ebb35924
 	gorm.io/driver/postgres v1.4.6
 	gorm.io/gorm v1.24.3
 )

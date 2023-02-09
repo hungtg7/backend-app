@@ -3,7 +3,7 @@ package repo
 import (
 	"context"
 
-	"github.com/hungtg7/api-app/app/order/entity"
+	"github.com/hungtg7/backend-app/app/order/entity"
 	"gorm.io/gorm"
 )
 

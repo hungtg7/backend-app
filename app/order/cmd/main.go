@@ -7,11 +7,11 @@ import (
 
 	"gorm.io/driver/postgres"
 
-	"github.com/hungtg7/api-app/app/order/config"
-	"github.com/hungtg7/api-app/app/order/repo"
-	"github.com/hungtg7/api-app/app/order/service"
-	"github.com/hungtg7/api-app/lib/logging"
-	"github.com/hungtg7/api-app/lib/server/restapi"
+	"github.com/hungtg7/backend-app/app/order/config"
+	"github.com/hungtg7/backend-app/app/order/repo"
+	"github.com/hungtg7/backend-app/app/order/service"
+	"github.com/hungtg7/backend-app/lib/logging"
+	"github.com/hungtg7/backend-app/lib/server/restapi"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
 )
