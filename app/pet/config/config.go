@@ -1,7 +1,7 @@
 package config
 
 import (
-	"github.com/hungtg7/api-app/lib/server/grpc"
+	"github.com/hungtg7/backend-app/lib/server/grpc"
 )
 
 // config base

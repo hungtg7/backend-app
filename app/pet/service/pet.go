@@ -4,10 +4,10 @@ import (
 	"context"
 	"strconv"
 
-	"github.com/hungtg7/api-app/app/pet/config"
-	"github.com/hungtg7/api-app/app/pet/entity"
-	"github.com/hungtg7/api-app/app/pet/repo"
-	petv1 "github.com/hungtg7/api-app/pkg/proto_file/pet"
+	"github.com/hungtg7/backend-app/app/pet/config"
+	"github.com/hungtg7/backend-app/app/pet/entity"
+	"github.com/hungtg7/backend-app/app/pet/repo"
+	petv1 "github.com/hungtg7/backend-app/pkg/proto_file/pet"
 	"google.golang.org/grpc"
 )
 
@@ -48,6 +48,28 @@ func (s *Service) GetPet(ctx context.Context, req *petv1.GetPetRequest) (*petv1.
 	}
 	p1 := &petv1.Pet{Id: int32(id)}
 	resp.Pet = p1
+	return resp, nil
+}
+
+func (s *Service) GetAllPet(ctx context.Context, req *petv1.GetAllPetRequest) (*petv1.GetAllPetResponse, error) {
+	resp := &petv1.GetAllPetResponse{}
+	// pet, err := s.repo.GetPetByID(ctx, req.GetPetId())
+	// if err != nil {
+	// 	return nil, err
+	// }
+	// Serializing the struct and assigning it to body
+	// p1 := &petv1.Pet{PetType: pet.PetType, Id: pet.ID, CreatedAt: timestamppb.New(pet.CreatedAt)}
+	p1 := &petv1.Pet{
+		Id:      1234,
+		Name:    "Heo",
+		PetType: "cat",
+	}
+	p2 := &petv1.Pet{
+		Id:      12,
+		Name:    "Bo",
+		PetType: "cat",
+	}
+	resp.Pet = []*petv1.Pet{p1, p2}
 	return resp, nil
 }
 

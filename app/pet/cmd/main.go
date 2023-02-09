@@ -7,11 +7,11 @@ import (
 	grpc_zap "github.com/grpc-ecosystem/go-grpc-middleware/logging/zap"
 	"gorm.io/driver/postgres"
 
-	"github.com/hungtg7/api-app/app/pet/config"
-	"github.com/hungtg7/api-app/app/pet/repo"
-	"github.com/hungtg7/api-app/app/pet/service"
-	"github.com/hungtg7/api-app/lib/logging"
-	"github.com/hungtg7/api-app/lib/server/grpc"
+	"github.com/hungtg7/backend-app/app/pet/config"
+	"github.com/hungtg7/backend-app/app/pet/repo"
+	"github.com/hungtg7/backend-app/app/pet/service"
+	"github.com/hungtg7/backend-app/lib/logging"
+	"github.com/hungtg7/backend-app/lib/server/grpc"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
 )
