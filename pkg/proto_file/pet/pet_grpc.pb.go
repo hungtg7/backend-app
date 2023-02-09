@@ -18,6 +18,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PetStoreClient interface {
 	GetPet(ctx context.Context, in *GetPetRequest, opts ...grpc.CallOption) (*GetPetResponse, error)
+	GetAllPet(ctx context.Context, in *GetAllPetRequest, opts ...grpc.CallOption) (*GetAllPetResponse, error)
 	CreatePet(ctx context.Context, in *CreatePetRequest, opts ...grpc.CallOption) (*CreatePetResponse, error)
 	DeletePet(ctx context.Context, in *DeletePetRequest, opts ...grpc.CallOption) (*DeletePetResponse, error)
 }
@@ -33,6 +34,15 @@ func NewPetStoreClient(cc grpc.ClientConnInterface) PetStoreClient {
 func (c *petStoreClient) GetPet(ctx context.Context, in *GetPetRequest, opts ...grpc.CallOption) (*GetPetResponse, error) {
 	out := new(GetPetResponse)
 	err := c.cc.Invoke(ctx, "/pet.v1.PetStore/GetPet", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *petStoreClient) GetAllPet(ctx context.Context, in *GetAllPetRequest, opts ...grpc.CallOption) (*GetAllPetResponse, error) {
+	out := new(GetAllPetResponse)
+	err := c.cc.Invoke(ctx, "/pet.v1.PetStore/GetAllPet", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -62,6 +72,7 @@ func (c *petStoreClient) DeletePet(ctx context.Context, in *DeletePetRequest, op
 // for forward compatibility
 type PetStoreServer interface {
 	GetPet(context.Context, *GetPetRequest) (*GetPetResponse, error)
+	GetAllPet(context.Context, *GetAllPetRequest) (*GetAllPetResponse, error)
 	CreatePet(context.Context, *CreatePetRequest) (*CreatePetResponse, error)
 	DeletePet(context.Context, *DeletePetRequest) (*DeletePetResponse, error)
 }
@@ -72,6 +83,9 @@ type UnimplementedPetStoreServer struct {
 
 func (UnimplementedPetStoreServer) GetPet(context.Context, *GetPetRequest) (*GetPetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPet not implemented")
+}
+func (UnimplementedPetStoreServer) GetAllPet(context.Context, *GetAllPetRequest) (*GetAllPetResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAllPet not implemented")
 }
 func (UnimplementedPetStoreServer) CreatePet(context.Context, *CreatePetRequest) (*CreatePetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreatePet not implemented")
@@ -105,6 +119,24 @@ func _PetStore_GetPet_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PetStoreServer).GetPet(ctx, req.(*GetPetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PetStore_GetAllPet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAllPetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PetStoreServer).GetAllPet(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pet.v1.PetStore/GetAllPet",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PetStoreServer).GetAllPet(ctx, req.(*GetAllPetRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -152,6 +184,10 @@ var _PetStore_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPet",
 			Handler:    _PetStore_GetPet_Handler,
+		},
+		{
+			MethodName: "GetAllPet",
+			Handler:    _PetStore_GetAllPet_Handler,
 		},
 		{
 			MethodName: "CreatePet",

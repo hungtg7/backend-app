@@ -1,4 +1,4 @@
-module github.com/hungtg7/api-app/pkg
+module github.com/hungtg7/backend-app/pkg
 
 go 1.19
 
