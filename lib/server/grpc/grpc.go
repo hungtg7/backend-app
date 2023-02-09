@@ -8,7 +8,7 @@ import (
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	grpc_auth "github.com/grpc-ecosystem/go-grpc-middleware/auth"
 	grpc_ctxtags "github.com/grpc-ecosystem/go-grpc-middleware/tags"
-	"github.com/hungtg7/api-app/lib/middleware"
+	"github.com/hungtg7/backend-app/lib/middleware"
 	"google.golang.org/grpc"
 )
 
