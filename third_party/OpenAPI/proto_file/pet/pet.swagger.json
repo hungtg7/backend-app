@@ -59,6 +59,17 @@
     "v1DeletePetResponse": {
       "type": "object"
     },
+    "v1GetAllPetResponse": {
+      "type": "object",
+      "properties": {
+        "pet": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Pet"
+          }
+        }
+      }
+    },
     "v1GetPetResponse": {
       "type": "object",
       "properties": {

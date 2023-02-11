@@ -2,11 +2,34 @@
  _transform: true
 
  services:
- - name: order_service
-   url: http://order:8888/order
+ - name: webapp
+   url: http://webapp:3000/
    protocol: http
    routes:
-   - name: order_route
+   - name: webapp_route
      paths:
-     - /order
+     - /
      strip_path: true
+ #
+ - name: pet
+   protocol: grpc
+   host: pet
+   port: 10550
+   routes:
+   routes:
+    - name: pet-route
+      methods: 
+      - GET  
+      protocols:
+      - http
+      paths:
+      - /pet/v1
+      plugins:
+      - name: grpc-gateway
+        config:
+          proto: proto_file/pet/pet.proto
+
+ # plugins:
+ # - name: grpc-gateway
+ #   config: 
+ #     proto: proto_file/pet/pet.proto

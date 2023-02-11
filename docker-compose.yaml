@@ -52,7 +52,7 @@ services:
     platform: linux/amd64
     depends_on:
     - postgres
-    - order
+    - webapp
     environment:
       <<: *kong-env
     volumes:
@@ -101,5 +101,14 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+  webapp:
+    build:
+      context: ../frontend-app
+      dockerfile: ./Dockerfile 
+    restart: always
+    depends_on:
+      - pet
+    ports:
+      - "3000:3000"
 
 
