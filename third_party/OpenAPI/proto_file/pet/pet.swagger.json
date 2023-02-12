@@ -15,7 +15,30 @@
   "produces": [
     "application/json"
   ],
-  "paths": {},
+  "paths": {
+    "/pet/v1": {
+      "get": {
+        "operationId": "PetStore_GetPets",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetAllPetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "PetStore"
+        ]
+      }
+    }
+  },
   "definitions": {
     "protobufAny": {
       "type": "object",

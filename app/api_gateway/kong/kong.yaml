@@ -10,26 +10,4 @@
      paths:
      - /
      strip_path: true
- #
- - name: pet
-   protocol: grpc
-   host: pet
-   port: 10550
-   routes:
-   routes:
-    - name: pet-route
-      methods: 
-      - GET  
-      protocols:
-      - http
-      paths:
-      - /pet/v1
-      plugins:
-      - name: grpc-gateway
-        config:
-          proto: proto_file/pet/pet.proto
-
- # plugins:
- # - name: grpc-gateway
- #   config: 
- #     proto: proto_file/pet/pet.proto
+ 

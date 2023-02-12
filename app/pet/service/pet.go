@@ -72,6 +72,27 @@ func (s *Service) GetAllPet(ctx context.Context, req *petv1.GetAllPetRequest) (*
 	resp.Pet = []*petv1.Pet{p1, p2}
 	return resp, nil
 }
+func (s *Service) GetPets(ctx context.Context, req *petv1.GetAllPetRequest) (*petv1.GetAllPetResponse, error) {
+	resp := &petv1.GetAllPetResponse{}
+	// pet, err := s.repo.GetPetByID(ctx, req.GetPetId())
+	// if err != nil {
+	// 	return nil, err
+	// }
+	// Serializing the struct and assigning it to body
+	// p1 := &petv1.Pet{PetType: pet.PetType, Id: pet.ID, CreatedAt: timestamppb.New(pet.CreatedAt)}
+	p1 := &petv1.Pet{
+		Id:      1234,
+		Name:    "Heo",
+		PetType: "cat",
+	}
+	p2 := &petv1.Pet{
+		Id:      12,
+		Name:    "Bo",
+		PetType: "cat",
+	}
+	resp.Pet = []*petv1.Pet{p1, p2}
+	return resp, nil
+}
 
 func (s *Service) CreatePet(ctx context.Context, req *petv1.CreatePetRequest) (*petv1.CreatePetResponse, error) {
 	var resp *petv1.CreatePetResponse

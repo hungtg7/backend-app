@@ -10,13 +10,12 @@ import (
 	petv1 "github.com/hungtg7/backend-app/pkg/proto_file/pet"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
-	// Update
 )
 
 var (
 	// command-line options:
 	// gRPC server endpoint
-	grpcServerEndpoint = flag.String("grpc-server-endpoint", "0.0.0.0:9090", "gRPC server endpoint")
+	grpcServerEndpoint = flag.String("grpc-server-endpoint", "pet:10550", "gRPC server endpoint")
 )
 
 func run() error {
@@ -28,13 +27,13 @@ func run() error {
 	// Note: Make sure the gRPC server is running properly and accessible
 	mux := runtime.NewServeMux()
 	opts := []grpc.DialOption{grpc.WithTransportCredentials(insecure.NewCredentials())}
-	err := petv1.RegisterPetStoreHandlerServer(ctx, mux, *grpcServerEndpoint, opts)
+	err := petv1.RegisterPetStoreHandlerFromEndpoint(ctx, mux, *grpcServerEndpoint, opts)
 	if err != nil {
 		return err
 	}
 
 	// Start HTTP server (and proxy calls to gRPC server endpoint)
-	return http.ListenAndServe(":8081", mux)
+	return http.ListenAndServe(":9090", mux)
 }
 
 func main() {
