@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/golang/glog v1.0.0
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.15.0
-	github.com/hungtg7/backend-app/pkg v0.0.0-20230212161128-bc447a58a851
+	github.com/hungtg7/backend-app/pkg v0.0.0-20230212162945-1ac16d097272
 	google.golang.org/grpc v1.53.0
 )
 
