@@ -2,9 +2,8 @@
 Platform will include all backend component
 
 ## Component
-1. Rest API TODO
-2. Proxy (Reverse Proxy): TODO
-3. Cache
+1. Cache: TODO
+2. Services mesh (istio): TODO
 4. Perf test
 
 ## Running
