@@ -108,7 +108,7 @@ services:
       - pet
     ports:
       - "3000:3000"
-  grpc_gateway:
+  grpc-gateway:
     build:
       context: .
       dockerfile: app/grpc_gateway/Dockerfile 
