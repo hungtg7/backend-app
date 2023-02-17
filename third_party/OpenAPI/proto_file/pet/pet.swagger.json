@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/pet/v1": {
+    "/pet/v1/getall/{limit}/{offset}": {
       "get": {
         "operationId": "PetStore_GetPets",
         "responses": {
@@ -36,15 +36,15 @@
         "parameters": [
           {
             "name": "limit",
-            "in": "query",
-            "required": false,
+            "in": "path",
+            "required": true,
             "type": "integer",
             "format": "int32"
           },
           {
             "name": "offset",
-            "in": "query",
-            "required": false,
+            "in": "path",
+            "required": true,
             "type": "integer",
             "format": "int32"
           }
@@ -101,6 +101,10 @@
     "v1GetAllPetResponse": {
       "type": "object",
       "properties": {
+        "total": {
+          "type": "string",
+          "format": "int64"
+        },
         "pet": {
           "type": "array",
           "items": {

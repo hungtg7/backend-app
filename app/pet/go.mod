@@ -12,7 +12,7 @@ require (
 
 require (
 	github.com/hungtg7/backend-app/lib v0.0.0-20230209171513-2bc4ebb35924
-	github.com/hungtg7/backend-app/pkg v0.0.0-20230215065340-d5144f6755f0
+	github.com/hungtg7/backend-app/pkg v0.0.0-20230217165033-8db6ad33bb15
 )
 
 require (
@@ -23,6 +23,7 @@ require (
 	github.com/jackc/pgx/v5 v5.2.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
+	github.com/pkg/errors v0.9.1 // indirect
 	go.uber.org/atomic v1.10.0 // indirect
 	go.uber.org/multierr v1.9.0 // indirect
 	go.uber.org/zap v1.24.0 // indirect
