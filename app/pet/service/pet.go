@@ -53,44 +53,35 @@ func (s *Service) GetPet(ctx context.Context, req *petv1.GetPetRequest) (*petv1.
 
 func (s *Service) GetAllPet(ctx context.Context, req *petv1.GetAllPetRequest) (*petv1.GetAllPetResponse, error) {
 	resp := &petv1.GetAllPetResponse{}
-	// pet, err := s.repo.GetPetByID(ctx, req.GetPetId())
-	// if err != nil {
-	// 	return nil, err
-	// }
+
+	total := s.repo.CountAllPet(ctx)
+	pet, err := s.repo.GetPets(ctx, int(req.Offset), int(req.Limit))
+	if err != nil {
+		return nil, err
+	}
 	// Serializing the struct and assigning it to body
-	// p1 := &petv1.Pet{PetType: pet.PetType, Id: pet.ID, CreatedAt: timestamppb.New(pet.CreatedAt)}
-	p1 := &petv1.Pet{
-		Id:      1234,
-		Name:    "Heo",
-		PetType: "cat",
-	}
-	p2 := &petv1.Pet{
-		Id:      12,
-		Name:    "Bo",
-		PetType: "cat",
-	}
-	resp.Pet = []*petv1.Pet{p1, p2}
-	return resp, nil
-}
-func (s *Service) GetPets(ctx context.Context, req *petv1.GetAllPetRequest) (*petv1.GetAllPetResponse, error) {
-	resp := &petv1.GetAllPetResponse{}
-	// pet, err := s.repo.GetPetByID(ctx, req.GetPetId())
-	// if err != nil {
-	// 	return nil, err
+	// p1 := &petv1.Pet{
+	// 	Id:      1234,
+	// 	Name:    "Heo",
+	// 	PetType: "cat",
 	// }
-	// Serializing the struct and assigning it to body
-	// p1 := &petv1.Pet{PetType: pet.PetType, Id: pet.ID, CreatedAt: timestamppb.New(pet.CreatedAt)}
-	p1 := &petv1.Pet{
-		Id:      1234,
-		Name:    "Heo",
-		PetType: "cat",
+	// p2 := &petv1.Pet{
+	// 	Id:      12,
+	// 	Name:    "Bo",
+	// 	PetType: "cat",
+	// }
+	respPet := []*petv1.Pet{}
+
+	for _, p := range pet {
+		petPb := &petv1.Pet{}
+		petPb.Id = p.ID
+		petPb.Name = p.Name
+		petPb.PetType = p.PetType
+		respPet = append(respPet, petPb)
 	}
-	p2 := &petv1.Pet{
-		Id:      12,
-		Name:    "Bo",
-		PetType: "cat",
-	}
-	resp.Pet = []*petv1.Pet{p1, p2}
+	// resp.Pet = []*petv1.Pet{p1, p2}
+	resp.Pet = respPet
+	resp.Total = total
 	return resp, nil
 }
 
