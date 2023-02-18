@@ -42,6 +42,10 @@ github.com/hungtg7/backend-app/pkg v0.0.0-20230215065340-d5144f6755f0 h1:2h+kkgn
 github.com/hungtg7/backend-app/pkg v0.0.0-20230215065340-d5144f6755f0/go.mod h1:SGWcIwL/Jdhr83R6AkZb6+cV1qT5RQpSCtsYTe9Hf88=
 github.com/hungtg7/backend-app/pkg v0.0.0-20230217165033-8db6ad33bb15 h1:KejdY/NtWQpIEWHrWVKahMxmav8Vq9vsXPWD1Ckqc7o=
 github.com/hungtg7/backend-app/pkg v0.0.0-20230217165033-8db6ad33bb15/go.mod h1:SGWcIwL/Jdhr83R6AkZb6+cV1qT5RQpSCtsYTe9Hf88=
+github.com/hungtg7/backend-app/pkg v0.0.0-20230217180037-b7f5227d296e h1:cbu8tOruyt9iU7F5gp8v4n7M4+uJucaelL0dmSmQWyc=
+github.com/hungtg7/backend-app/pkg v0.0.0-20230217180037-b7f5227d296e/go.mod h1:SGWcIwL/Jdhr83R6AkZb6+cV1qT5RQpSCtsYTe9Hf88=
+github.com/hungtg7/backend-app/pkg v0.0.0-20230218045013-e98e7db4ab25 h1:2tKn+Y/1KiIEGOuk/W2C+Z+j4Ff+P3QkIiZO4Z7oDUA=
+github.com/hungtg7/backend-app/pkg v0.0.0-20230218045013-e98e7db4ab25/go.mod h1:SGWcIwL/Jdhr83R6AkZb6+cV1qT5RQpSCtsYTe9Hf88=
 github.com/jackc/pgpassfile v1.0.0 h1:/6Hmqy13Ss2zCq62VdNG8tM1wchn8zjSGOBJ6icpsIM=
 github.com/jackc/pgpassfile v1.0.0/go.mod h1:CEx0iS5ambNFdcRtxPj5JhEz+xB6uRky5eyVu/W2HEg=
 github.com/jackc/pgservicefile v0.0.0-20200714003250-2b9c44734f2b/go.mod h1:vsD4gTJCa9TptPL8sPkXrLZ+hDuNrZCnj29CQpr4X1E=

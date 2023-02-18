@@ -7,6 +7,7 @@ import (
 	"github.com/hungtg7/backend-app/app/pet/config"
 	"github.com/hungtg7/backend-app/app/pet/entity"
 	"github.com/hungtg7/backend-app/app/pet/repo"
+	"github.com/hungtg7/backend-app/lib/logging"
 	petv1 "github.com/hungtg7/backend-app/pkg/proto_file/pet"
 	"google.golang.org/grpc"
 )
@@ -36,12 +37,6 @@ func (s *Service) Close(ctx context.Context) {
 
 func (s *Service) GetPet(ctx context.Context, req *petv1.GetPetRequest) (*petv1.GetPetResponse, error) {
 	resp := &petv1.GetPetResponse{}
-	// pet, err := s.repo.GetPetByID(ctx, req.GetPetId())
-	// if err != nil {
-	// 	return nil, err
-	// }
-	// Serializing the struct and assigning it to body
-	// p1 := &petv1.Pet{PetType: pet.PetType, Id: pet.ID, CreatedAt: timestamppb.New(pet.CreatedAt)}
 	id, err := strconv.Atoi(req.GetPetId())
 	if err != nil {
 		return nil, err
@@ -52,10 +47,11 @@ func (s *Service) GetPet(ctx context.Context, req *petv1.GetPetRequest) (*petv1.
 }
 
 func (s *Service) GetAllPet(ctx context.Context, req *petv1.GetAllPetRequest) (*petv1.GetAllPetResponse, error) {
+	logging.Log.Info("Getting All pet...")
 	resp := &petv1.GetAllPetResponse{}
 
 	total := s.repo.CountAllPet(ctx)
-	pet, err := s.repo.GetPets(ctx, int(req.Offset), int(req.Limit))
+	pet, err := s.repo.GetPets(ctx, int(req.Offset))
 	if err != nil {
 		return nil, err
 	}

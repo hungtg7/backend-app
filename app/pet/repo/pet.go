@@ -29,11 +29,11 @@ func (r *PetRepo) CountAllPet(ctx context.Context) int64 {
 	return count
 }
 
-func (r *PetRepo) GetPets(ctx context.Context, offset int, limit int) ([]*entity.Pet, error) {
+func (r *PetRepo) GetPets(ctx context.Context, offset int) ([]*entity.Pet, error) {
 	var pet []*entity.Pet
 
 	query := r.Db
-	if err := query.Limit(limit).Offset(offset).Find(pet).Error; err != nil {
+	if err := query.Limit(10).Offset(offset).Find(pet).Error; err != nil {
 		return nil, err
 	}
 

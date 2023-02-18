@@ -25,4 +25,6 @@ install:
 		github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2
 
 deploy:
-	docker compose up --scale order=2
+	docker compose down --rmi all
+	docker compose up
+	# docker compose up --scale order=2
