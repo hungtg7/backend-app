@@ -31,6 +31,10 @@ var _ = runtime.String
 var _ = utilities.NewDoubleArray
 var _ = metadata.Join
 
+var (
+	filter_PetStore_GetAllPet_0 = &utilities.DoubleArray{Encoding: map[string]int{"offset": 0}, Base: []int{1, 2, 0, 0}, Check: []int{0, 1, 2, 2}}
+)
+
 func request_PetStore_GetAllPet_0(ctx context.Context, marshaler runtime.Marshaler, client PetStoreClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq GetAllPetRequest
 	var metadata runtime.ServerMetadata
@@ -42,16 +46,6 @@ func request_PetStore_GetAllPet_0(ctx context.Context, marshaler runtime.Marshal
 		_   = err
 	)
 
-	val, ok = pathParams["limit"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "limit")
-	}
-
-	protoReq.Limit, err = runtime.Int32(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "limit", err)
-	}
-
 	val, ok = pathParams["offset"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "offset")
@@ -60,6 +54,13 @@ func request_PetStore_GetAllPet_0(ctx context.Context, marshaler runtime.Marshal
 	protoReq.Offset, err = runtime.Int32(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "offset", err)
+	}
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_PetStore_GetAllPet_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
 	msg, err := client.GetAllPet(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -78,16 +79,6 @@ func local_request_PetStore_GetAllPet_0(ctx context.Context, marshaler runtime.M
 		_   = err
 	)
 
-	val, ok = pathParams["limit"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "limit")
-	}
-
-	protoReq.Limit, err = runtime.Int32(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "limit", err)
-	}
-
 	val, ok = pathParams["offset"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "offset")
@@ -96,6 +87,13 @@ func local_request_PetStore_GetAllPet_0(ctx context.Context, marshaler runtime.M
 	protoReq.Offset, err = runtime.Int32(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "offset", err)
+	}
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_PetStore_GetAllPet_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
 	msg, err := server.GetAllPet(ctx, &protoReq)
@@ -117,7 +115,7 @@ func RegisterPetStoreHandlerServer(ctx context.Context, mux *runtime.ServeMux, s
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pet.v1.PetStore/GetAllPet", runtime.WithHTTPPathPattern("/pet/v1/getall/{limit}/{offset}"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pet.v1.PetStore/GetAllPet", runtime.WithHTTPPathPattern("/pet/v1/getall/{offset}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -181,7 +179,7 @@ func RegisterPetStoreHandlerClient(ctx context.Context, mux *runtime.ServeMux, c
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pet.v1.PetStore/GetAllPet", runtime.WithHTTPPathPattern("/pet/v1/getall/{limit}/{offset}"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pet.v1.PetStore/GetAllPet", runtime.WithHTTPPathPattern("/pet/v1/getall/{offset}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -201,7 +199,7 @@ func RegisterPetStoreHandlerClient(ctx context.Context, mux *runtime.ServeMux, c
 }
 
 var (
-	pattern_PetStore_GetAllPet_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 1, 0, 4, 1, 5, 4}, []string{"pet", "v1", "getall", "limit", "offset"}, ""))
+	pattern_PetStore_GetAllPet_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"pet", "v1", "getall", "offset"}, ""))
 )
 
 var (
