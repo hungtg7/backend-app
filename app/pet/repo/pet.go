@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/hungtg7/backend-app/app/pet/entity"
+	"github.com/hungtg7/backend-app/lib/logging"
 	"gorm.io/gorm"
 )
 
@@ -24,6 +25,7 @@ func (r *PetRepo) GetPetByID(ctx context.Context, id string) (*entity.Pet, error
 }
 
 func (r *PetRepo) CountAllPet(ctx context.Context) int64 {
+	logging.Log.Info("Counting...")
 	var count int64
 	r.Db.Table("pet").Count(&count)
 	return count
@@ -31,9 +33,10 @@ func (r *PetRepo) CountAllPet(ctx context.Context) int64 {
 
 func (r *PetRepo) GetPets(ctx context.Context, offset int, limit int) ([]*entity.Pet, error) {
 	var pet []*entity.Pet
+	logging.Log.Info("Get pet ijn DB")
 
 	query := r.Db
-	if err := query.Limit(limit).Offset(offset).Find(pet).Error; err != nil {
+	if err := query.Limit(limit).Offset(offset).Find(&pet).Error; err != nil {
 		return nil, err
 	}
 
