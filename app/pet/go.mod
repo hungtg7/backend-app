@@ -11,8 +11,8 @@ require (
 )
 
 require (
-	github.com/hungtg7/backend-app/lib v0.0.0-20230209171513-2bc4ebb35924
-	github.com/hungtg7/backend-app/pkg v0.0.0-20230218045013-e98e7db4ab25
+	github.com/hungtg7/backend-app/lib v0.0.0-20230218171030-a9fa44d4677d
+	github.com/hungtg7/backend-app/pkg v0.0.0-20230218171030-a9fa44d4677d
 )
 
 require (

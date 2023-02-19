@@ -38,6 +38,8 @@ github.com/grpc-ecosystem/grpc-gateway/v2 v2.15.0 h1:1JYBfzqrWPcCclBwxFCPAou9n+q
 github.com/grpc-ecosystem/grpc-gateway/v2 v2.15.0/go.mod h1:YDZoGHuwE+ov0c8smSH49WLF3F2LaWnYYuDVd+EWrc0=
 github.com/hungtg7/backend-app/lib v0.0.0-20230209171513-2bc4ebb35924 h1:Vn+I/9tHxwsoV921s+nYXIKuTtt5yP8KBjQWkNDOJkg=
 github.com/hungtg7/backend-app/lib v0.0.0-20230209171513-2bc4ebb35924/go.mod h1:0m1gwU4oQO+g2F2huZoo8TBmS51ZqmyKUwzUmJtOpR4=
+github.com/hungtg7/backend-app/lib v0.0.0-20230218171030-a9fa44d4677d h1:8G+Gdze6CH3EVTMs2H+OwKCpunfRYetXBFeGiBR20MY=
+github.com/hungtg7/backend-app/lib v0.0.0-20230218171030-a9fa44d4677d/go.mod h1:0m1gwU4oQO+g2F2huZoo8TBmS51ZqmyKUwzUmJtOpR4=
 github.com/hungtg7/backend-app/pkg v0.0.0-20230215065340-d5144f6755f0 h1:2h+kkgngplcqWAe+nn++l+uYqQB9PSgKu13K9XGLxE4=
 github.com/hungtg7/backend-app/pkg v0.0.0-20230215065340-d5144f6755f0/go.mod h1:SGWcIwL/Jdhr83R6AkZb6+cV1qT5RQpSCtsYTe9Hf88=
 github.com/hungtg7/backend-app/pkg v0.0.0-20230217165033-8db6ad33bb15 h1:KejdY/NtWQpIEWHrWVKahMxmav8Vq9vsXPWD1Ckqc7o=
@@ -46,6 +48,8 @@ github.com/hungtg7/backend-app/pkg v0.0.0-20230217180037-b7f5227d296e h1:cbu8tOr
 github.com/hungtg7/backend-app/pkg v0.0.0-20230217180037-b7f5227d296e/go.mod h1:SGWcIwL/Jdhr83R6AkZb6+cV1qT5RQpSCtsYTe9Hf88=
 github.com/hungtg7/backend-app/pkg v0.0.0-20230218045013-e98e7db4ab25 h1:2tKn+Y/1KiIEGOuk/W2C+Z+j4Ff+P3QkIiZO4Z7oDUA=
 github.com/hungtg7/backend-app/pkg v0.0.0-20230218045013-e98e7db4ab25/go.mod h1:SGWcIwL/Jdhr83R6AkZb6+cV1qT5RQpSCtsYTe9Hf88=
+github.com/hungtg7/backend-app/pkg v0.0.0-20230218171030-a9fa44d4677d h1:eMDZqJAnoJV696V4DgWA33nh5r86gg1YA/qYRuP8aOQ=
+github.com/hungtg7/backend-app/pkg v0.0.0-20230218171030-a9fa44d4677d/go.mod h1:SGWcIwL/Jdhr83R6AkZb6+cV1qT5RQpSCtsYTe9Hf88=
 github.com/jackc/pgpassfile v1.0.0 h1:/6Hmqy13Ss2zCq62VdNG8tM1wchn8zjSGOBJ6icpsIM=
 github.com/jackc/pgpassfile v1.0.0/go.mod h1:CEx0iS5ambNFdcRtxPj5JhEz+xB6uRky5eyVu/W2HEg=
 github.com/jackc/pgservicefile v0.0.0-20200714003250-2b9c44734f2b/go.mod h1:vsD4gTJCa9TptPL8sPkXrLZ+hDuNrZCnj29CQpr4X1E=
