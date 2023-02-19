@@ -26,5 +26,5 @@ install:
 
 deploy:
 	docker compose down --rmi all
-	docker compose up
+	docker compose up --build
 	# docker compose up --scale order=2

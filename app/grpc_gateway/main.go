@@ -3,10 +3,12 @@ package main
 import (
 	"context"
 	"flag"
+	"fmt"
 	"net/http"
 
 	"github.com/golang/glog"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
+	"github.com/hungtg7/backend-app/lib/logging"
 	petv1 "github.com/hungtg7/backend-app/pkg/proto_file/pet"
 
 	"google.golang.org/grpc"
@@ -79,6 +81,13 @@ func CORS(next http.Handler) http.Handler {
 func main() {
 	flag.Parse()
 	defer glog.Flush()
+
+	// initialize logger
+	if err := logging.Init(0, ""); err != nil {
+		fmt.Printf("failed to initialize logger: %v", err)
+	}
+
+	logging.Log.Info("GRPC gateway is running")
 
 	if err := run(); err != nil {
 		glog.Fatal(err)
