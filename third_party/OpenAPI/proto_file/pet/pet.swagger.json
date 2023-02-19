@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/pet/v1/getall/{offset}": {
+    "/pet/v1/getall": {
       "get": {
         "operationId": "PetStore_GetAllPet",
         "responses": {
@@ -35,14 +35,14 @@
         },
         "parameters": [
           {
-            "name": "offset",
-            "in": "path",
-            "required": true,
+            "name": "limit",
+            "in": "query",
+            "required": false,
             "type": "integer",
             "format": "int32"
           },
           {
-            "name": "limit",
+            "name": "offset",
             "in": "query",
             "required": false,
             "type": "integer",
