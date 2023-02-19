@@ -51,7 +51,7 @@ func (s *Service) GetAllPet(ctx context.Context, req *petv1.GetAllPetRequest) (*
 	resp := &petv1.GetAllPetResponse{}
 
 	total := s.repo.CountAllPet(ctx)
-	pet, err := s.repo.GetPets(ctx, int(req.Offset))
+	pet, err := s.repo.GetPets(ctx, int(req.Offset), int(req.Limit))
 	if err != nil {
 		return nil, err
 	}

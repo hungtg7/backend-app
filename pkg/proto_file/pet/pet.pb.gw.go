@@ -81,7 +81,7 @@ func RegisterPetStoreHandlerServer(ctx context.Context, mux *runtime.ServeMux, s
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pet.v1.PetStore/GetAllPet", runtime.WithHTTPPathPattern("/pet/v1/getall"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pet.v1.PetStore/GetAllPet", runtime.WithHTTPPathPattern("/api/v1/pet"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -145,7 +145,7 @@ func RegisterPetStoreHandlerClient(ctx context.Context, mux *runtime.ServeMux, c
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pet.v1.PetStore/GetAllPet", runtime.WithHTTPPathPattern("/pet/v1/getall"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pet.v1.PetStore/GetAllPet", runtime.WithHTTPPathPattern("/api/v1/pet"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -165,7 +165,7 @@ func RegisterPetStoreHandlerClient(ctx context.Context, mux *runtime.ServeMux, c
 }
 
 var (
-	pattern_PetStore_GetAllPet_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"pet", "v1", "getall"}, ""))
+	pattern_PetStore_GetAllPet_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"api", "v1", "pet"}, ""))
 )
 
 var (

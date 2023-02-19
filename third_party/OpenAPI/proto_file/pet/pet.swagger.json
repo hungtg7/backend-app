@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/pet/v1/getall": {
+    "/api/v1/pet": {
       "get": {
         "operationId": "PetStore_GetAllPet",
         "responses": {
