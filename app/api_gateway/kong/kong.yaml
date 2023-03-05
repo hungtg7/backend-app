@@ -1,13 +1,26 @@
- _format_version: "3.0"
- _transform: true
+_format_version: "3.0"
+services:
+- connect_timeout: 60000
+  enabled: true
+  host: webapp
+  name: webapp-service
+  port: 3000
+  protocol: http
+  read_timeout: 60000
+  retries: 5
+  routes:
+  - https_redirect_status_code: 426
+    name: webapp-route
+    path_handling: v0
+    paths:
+    - /
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  write_timeout: 60000
 
- services:
- - name: webapp
-   url: http://webapp:3000/
-   protocol: http
-   routes:
-   - name: webapp_route
-     paths:
-     - /
-     strip_path: true
- 

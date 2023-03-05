@@ -1,5 +1,7 @@
 x-kong-config: &kong-env
-  KONG_DATABASE: "off"
+  KONG_DATABASE: "postgres"
+  KONG_PG_HOST: kong-db
+  KONG_PG_PASSWORD: kong
   KONG_PROXY_ACCESS_LOG: /dev/stdout
   KONG_ADMIN_ACCESS_LOG: /dev/stdout
   KONG_PROXY_ERROR_LOG: /dev/stderr
@@ -20,19 +22,20 @@ services:
       timeout: 60s
       retries: 5
       start_period: 80s
-  # kong-db:
-  #   image: postgres:14
-  #   restart: always
-  #   environment:
-  #     POSTGRES_DB: kong
-  #     POSTGRES_USER: kong
-  #     POSTGRES_PASSWORD: kong
-  #   healthcheck:
-  #     test: ["CMD-SHELL", "pg_isready", "-d", "postgres"]
-  #     interval: 30s
-  #     timeout: 60s
-  #     retries: 5
-  #     start_period: 80s
+  kong-db:
+    image: postgres:14
+    restart: always
+    environment:
+      POSTGRES_DB: kong
+      POSTGRES_USER: kong
+      POSTGRES_PASSWORD: kong
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-d", "postgres"]
+      interval: 30s
+      timeout: 60s
+      retries: 5
+      start_period: 80s
+  # Nginx config
   # nginx:
   #   image: nginx:latest 
   #   restart: always
@@ -48,38 +51,46 @@ services:
     restart: always
     platform: linux/amd64
     depends_on:
-    - postgres
+    - kong-db
     - webapp
     environment:
       <<: *kong-env
     volumes:
+      # - ./app/api_gateway/kong/kong.conf:/etc/kong/kong.conf
       - ./app/api_gateway/kong:/opt/kong
-      - ./proto_file:/opt
     command: "kong start"
     ports:
       - "8002:8002"
       - "8001:8001"
       - "8000:8000"
 
-  # kong-migrations:
-  #   image: kong/kong-gateway:latest 
-  #   command: kong migrations bootstrap
-  #   platform: linux/amd64
-  #   depends_on:
-  #     - postgres
-  #   environment:
-  #     <<: *kong-env
-  #   restart: on-failure
-  #
-  # kong-migrations-up:
-  #   image: kong/kong-gateway:latest
-  #   command: kong migrations up && kong migrations finish
-  #   platform: linux/amd64
-  #   depends_on:
-  #     - postgres
-  #   environment:
-  #     <<: *kong-env
-  #   restart: on-failure
+  kong-config:
+    build:
+      context: .
+      dockerfile: app/api_gateway/kong/Dockerfile 
+    depends_on:
+      kong:
+        condition: service_healthy
+
+  kong-migrations:
+    image: kong/kong-gateway:latest 
+    command: kong migrations bootstrap
+    platform: linux/amd64
+    depends_on:
+      - kong-db
+    environment:
+      <<: *kong-env
+    restart: on-failure
+
+  kong-migrations-up:
+    image: kong/kong-gateway:latest
+    command: kong migrations up && kong migrations finish
+    platform: linux/amd64
+    depends_on:
+      - kong-db
+    environment:
+      <<: *kong-env
+    restart: on-failure
 
   order:
     build:
