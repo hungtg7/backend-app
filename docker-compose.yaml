@@ -68,6 +68,7 @@ services:
     build:
       context: .
       dockerfile: app/api_gateway/kong/Dockerfile 
+    restart: always
     depends_on:
       kong:
         condition: service_healthy
