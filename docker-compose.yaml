@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+
+  celery:
+    build: .
+    depends_on:
+      - redis
+      - rabbitmq
+    environment:
+      BROKER_URL: amqp://guest:guest@rabbitmq//
+      CELERY_RESULT_BACKEND: redis://redis:6379/0
+

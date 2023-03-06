@@ -1,9 +1,9 @@
 from celery import Celery
 
-app = Celery('proj',
+app = Celery('app',
              broker='amqp://',
              backend='rpc://',
-             include=['proj.tasks'])
+             include=['app.task'])
 
 # Optional configuration, see the application user guide.
 app.conf.update(
