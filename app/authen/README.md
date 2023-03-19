@@ -1,4 +1,4 @@
-# ORDER service
+# AUTHENTICATION service
 
 ## Overview
 Currently is basic authenticate service with OAUTH2
