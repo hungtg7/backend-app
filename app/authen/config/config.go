@@ -17,7 +17,7 @@ type ServerConfig struct {
 // DefaultServerConfig return a default server config
 func AppServerConfig() ServerConfig {
 	return ServerConfig{
-		Addr: "0.0.0.0:8888",
+		Addr: "0.0.0.0:9999",
 	}
 }
 

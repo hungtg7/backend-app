@@ -22,8 +22,13 @@ func main() {
 
 	server.RegisterHandleFunc(
 		restapi.HandleFunc{
-			Pattern: "/authen",
-			Handler: authenService.Authenticate(ctx),
+			Pattern: "/auth/google/login",
+			Handler: authenService.OauthGoogleLogin(ctx),
+			Method:  []string{"GET"},
+		},
+		restapi.HandleFunc{
+			Pattern: "/auth/google/callback",
+			Handler: authenService.OauthGoogleLogin(ctx),
 			Method:  []string{"GET"},
 		},
 	)
