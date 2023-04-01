@@ -19,7 +19,7 @@ func (s *Service) OauthGoogleLogin(ctx context.Context) func(http.ResponseWriter
 		AuthCodeURL receive state that is a token to protect the user from CSRF attacks. You must always provide a non-empty string and
 		validate that it matches the the state query parameter on your redirect callback.
 		*/
-		u := googleOauthConfig.AuthCodeURL(oauthState)
+		u := s.googleOauthConfig.AuthCodeURL(oauthState)
 		fmt.Println(u)
 		http.Redirect(w, r, u, http.StatusTemporaryRedirect)
 	}
