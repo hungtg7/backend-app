@@ -28,7 +28,7 @@ func main() {
 		},
 		restapi.HandleFunc{
 			Pattern: "/auth/google/callback",
-			Handler: authenService.OauthGoogleLogin(ctx),
+			Handler: authenService.OauthGoogleCallback(ctx),
 			Method:  []string{"GET"},
 		},
 	)
