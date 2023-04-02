@@ -16,8 +16,6 @@ func (s *Service) OauthGoogleCallback(ctx context.Context) func(http.ResponseWri
 	return func(w http.ResponseWriter, r *http.Request) {
 		// Read oauthState from Cookie
 		oauthState, _ := r.Cookie("oauthstate")
-		fmt.Println(oauthState)
-		fmt.Println(r)
 
 		if r.FormValue("state") != oauthState.Value {
 			fmt.Println("invalid oauth google state")

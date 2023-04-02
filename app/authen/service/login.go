@@ -20,7 +20,6 @@ func (s *Service) OauthGoogleLogin(ctx context.Context) func(http.ResponseWriter
 		validate that it matches the the state query parameter on your redirect callback.
 		*/
 		u := s.googleOauthConfig.AuthCodeURL(oauthState)
-		fmt.Println(u)
 		http.Redirect(w, r, u, http.StatusTemporaryRedirect)
 	}
 }
