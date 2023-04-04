@@ -17,8 +17,10 @@ const (
 
 // Config hold http/grpc server config
 type ServerConfig struct {
-	Addr string
-	Port int
+	Addr        string
+	Port        int
+	KongAddr    string
+	RedirectURL string
 }
 
 // DefaultServerConfig return a default server config
@@ -28,9 +30,13 @@ func AppServerConfig() ServerConfig {
 		fmt.Printf("Init AppServerConfig error: %v", err)
 		return ServerConfig{}
 	}
+
+	kongAddr := os.Getenv("KONG_ADDR")
+
 	return ServerConfig{
-		Addr: fmt.Sprintf("0.0.0.0:%d", port),
-		Port: port,
+		Addr:     fmt.Sprintf("0.0.0.0:%d", port),
+		Port:     port,
+		KongAddr: kongAddr,
 	}
 }
 

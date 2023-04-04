@@ -11,7 +11,6 @@ import (
 
 const oauthGoogleUrlAPI = "https://www.googleapis.com/oauth2/v2/userinfo?access_token="
 
-
 func (s *Service) OauthGoogleCallback(ctx context.Context) func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		// Read oauthState from Cookie
@@ -55,3 +54,6 @@ func getUserDataFromGoogle(code string, oauthConfig *oauth2.Config) ([]byte, err
 	}
 	return contents, nil
 }
+
+// TODO: create user service and communicate with it
+func create_user() {}
