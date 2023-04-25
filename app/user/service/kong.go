@@ -7,11 +7,11 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/hungtg7/backend-app/app/authen/config"
+	"github.com/hungtg7/backend-app/app/user/config"
 )
 
 type consumerBody struct {
-	username string `json:"username"`
+	username string
 }
 
 func grant_athorize_service_to_user(user_id string)

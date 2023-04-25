@@ -1,17 +1,20 @@
-package service
+package oauth
 
 import (
 	"context"
+	"crypto/rand"
+	"encoding/base64"
 	"fmt"
 	"io"
 	"net/http"
+	"time"
 
 	"golang.org/x/oauth2"
 )
 
 const oauthGoogleUrlAPI = "https://www.googleapis.com/oauth2/v2/userinfo?access_token="
 
-func (s *Service) OauthGoogleCallback(ctx context.Context) func(http.ResponseWriter, *http.Request) {
+func OauthGoogleCallback(ctx context.Context, oauthConfig *oauth2.Config) func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		// Read oauthState from Cookie
 		oauthState, _ := r.Cookie("oauthstate")
@@ -22,7 +25,7 @@ func (s *Service) OauthGoogleCallback(ctx context.Context) func(http.ResponseWri
 			return
 		}
 
-		data, err := getUserDataFromGoogle(r.FormValue("code"), s.googleOauthConfig)
+		data, err := getUserDataFromGoogle(r.FormValue("code"), oauthConfig)
 		if err != nil {
 			fmt.Println(err.Error())
 			http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
@@ -33,6 +36,20 @@ func (s *Service) OauthGoogleCallback(ctx context.Context) func(http.ResponseWri
 		// Redirect or response with a token.
 		// More code .....
 		fmt.Fprintf(w, "UserInfo: %s\n", data)
+	}
+}
+
+func OauthGoogleLogin(ctx context.Context, oauthConfig *oauth2.Config) func(http.ResponseWriter, *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+		// Create oauthState cookie
+		oauthState := generateStateOauthCookie(w)
+
+		/*
+			AuthCodeURL receive state that is a token to protect the user from CSRF attacks. You must always provide a non-empty string and
+			validate that it matches the the state query parameter on your redirect callback.
+		*/
+		u := oauthConfig.AuthCodeURL(oauthState)
+		http.Redirect(w, r, u, http.StatusTemporaryRedirect)
 	}
 }
 
@@ -55,5 +72,14 @@ func getUserDataFromGoogle(code string, oauthConfig *oauth2.Config) ([]byte, err
 	return contents, nil
 }
 
-// TODO: create user service and communicate with it
-func create_user() {}
+func generateStateOauthCookie(w http.ResponseWriter) string {
+	var expiration = time.Now().Add(20 * time.Minute)
+
+	b := make([]byte, 16)
+	rand.Read(b)
+	state := base64.URLEncoding.EncodeToString(b)
+	cookie := http.Cookie{Name: "oauthstate", Value: state, Expires: expiration}
+	http.SetCookie(w, &cookie)
+
+	return state
+}

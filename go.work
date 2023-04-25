@@ -4,7 +4,7 @@ use (
 	./app/order
 	./app/pet
     ./app/grpc_gateway
-    ./app/authen
+    ./app/user
 	./lib
     ./pkg
 )

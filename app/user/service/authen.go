@@ -1,10 +1,13 @@
 package service
 
 import (
+	"context"
 	"fmt"
+	"net/http"
 	"os"
 
-	"github.com/hungtg7/backend-app/app/authen/config"
+	"github.com/hungtg7/backend-app/app/user/config"
+	"github.com/hungtg7/backend-app/app/user/service/oauth"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 )
@@ -28,4 +31,12 @@ func NewService(cfg *config.Base) *Service {
 		config:            cfg,
 		googleOauthConfig: googleOauthConfig,
 	}
+}
+
+func (s *Service) GoogleCallback(ctx context.Context) func(http.ResponseWriter, *http.Request) {
+	return oauth.OauthGoogleCallback(ctx, s.googleOauthConfig)
+}
+
+func (s *Service) GoogleLogin(ctx context.Context) func(http.ResponseWriter, *http.Request) {
+	return oauth.OauthGoogleLogin(ctx, s.googleOauthConfig)
 }

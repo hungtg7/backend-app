@@ -1,4 +1,4 @@
-module github.com/hungtg7/backend-app/app/authen
+module github.com/hungtg7/backend-app/app/user
 
 go 1.19
 
