@@ -14,7 +14,7 @@ type consumerBody struct {
 	username string
 }
 
-func grant_athorize_service_to_user(user_id string)
+func grant_athorize_service_to_user(user_id string) {}
 
 func create_consumer_for_new_comer(ctx context.Context, user_id string) error {
 	body := consumerBody{
