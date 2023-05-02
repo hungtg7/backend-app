@@ -4,39 +4,50 @@ import (
 	"context"
 	"crypto/rand"
 	"encoding/base64"
+	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
 	"time"
 
 	"golang.org/x/oauth2"
+
+	"github.com/hungtg7/backend-app/lib/logging"
 )
 
 const oauthGoogleUrlAPI = "https://www.googleapis.com/oauth2/v2/userinfo?access_token="
 
-func OauthGoogleCallback(ctx context.Context, oauthConfig *oauth2.Config) func(http.ResponseWriter, *http.Request) {
-	return func(w http.ResponseWriter, r *http.Request) {
-		// Read oauthState from Cookie
-		oauthState, _ := r.Cookie("oauthstate")
+type GoogleAccount struct {
+	Id             string
+	Email          string
+	Verified_email bool
+	Picture        string
+}
 
-		if r.FormValue("state") != oauthState.Value {
-			fmt.Println("invalid oauth google state")
-			http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
-			return
-		}
+func OauthGoogleCallback(ctx context.Context, oauthConfig *oauth2.Config, w http.ResponseWriter, r *http.Request) (*GoogleAccount, error) {
+	// Read oauthState from Cookie
+	oauthState, _ := r.Cookie("oauthstate")
+	acc := &GoogleAccount{}
 
-		data, err := getUserDataFromGoogle(r.FormValue("code"), oauthConfig)
-		if err != nil {
-			fmt.Println(err.Error())
-			http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
-			return
-		}
-
-		// GetOrCreate User in your db.
-		// Redirect or response with a token.
-		// More code .....
-		fmt.Fprintf(w, "UserInfo: %s\n", data)
+	if r.FormValue("state") != oauthState.Value {
+		logging.Log.Fatal("invalid oauth google state")
+		return nil, errors.New("InternalError")
 	}
+
+	data, err := getUserDataFromGoogle(r.FormValue("code"), oauthConfig)
+	if err != nil {
+		logging.Log.Fatal(err.Error())
+		return nil, errors.New("InternalError")
+	}
+
+	err = json.Unmarshal(data, acc)
+	if err != nil {
+		logging.Log.Fatal(err.Error())
+		http.Error(w, "InternalError", 500)
+		return nil, errors.New("InternalError")
+	}
+	return acc, nil
 }
 
 func OauthGoogleLogin(ctx context.Context, oauthConfig *oauth2.Config) func(http.ResponseWriter, *http.Request) {

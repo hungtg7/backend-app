@@ -16,6 +16,6 @@ type UserAccount struct {
 }
 
 // TableName returns ProductCategory's table name.
-func (UserProfile) TableName() string {
+func (UserAccount) TableName() string {
 	return "user_account"
 }

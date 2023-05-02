@@ -14,6 +14,6 @@ type GoogleAccount struct {
 }
 
 // TableName returns ProductCategory's table name.
-func (UserProfile) TableName() string {
+func (GoogleAccount) TableName() string {
 	return "google_account"
 }
