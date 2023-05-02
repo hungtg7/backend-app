@@ -3,6 +3,7 @@
 CREATE TABLE IF NOT EXISTS google_account (
     google_id varchar,
     user_profile_id integer,
+    email varchar,
 
     created_at timestamp,
     updated_at timestamp,
