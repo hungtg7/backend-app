@@ -130,15 +130,15 @@ services:
         condition: service_healthy
     ports:
       - "9090:9090"
-  authen:
+  user:
     build:
       context: .
-      dockerfile: app/authen/Dockerfile 
+      dockerfile: app/user/Dockerfile 
     restart: always
     depends_on:
       postgres:
         condition: service_healthy
     env_file:
-      - app/authen/.env
+      - app/user/.env
     ports:
       - "9999:9999"
