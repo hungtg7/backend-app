@@ -6,6 +6,7 @@ import (
 
 type GoogleAccount struct {
 	GoogleID      string `gorm:"primaryKey:column:google_id"`
+	Email         string `gorm:"column:email"`
 	UserProfileID int32  `gorm:"foreignKey:column:user_profile_id"`
 
 	CreatedAt time.Time `gorm:"column:created_at;autoCreateTime"`

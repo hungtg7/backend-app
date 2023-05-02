@@ -12,6 +12,7 @@ import (
 	"github.com/hungtg7/backend-app/app/user/config"
 	"github.com/hungtg7/backend-app/app/user/repo"
 	"github.com/hungtg7/backend-app/app/user/service/oauth"
+	"github.com/hungtg7/backend-app/lib/logging"
 )
 
 type Service struct {
@@ -48,6 +49,17 @@ func (s *Service) GoogleCallback(ctx context.Context) func(http.ResponseWriter, 
 		if !acc.Verified_email {
 			w.WriteHeader(http.StatusUnauthorized)
 			return
+		}
+
+		eGoogleAccount, err := s.repo.GetGoogleAccountByID(ctx, acc.Id)
+		if err != nil {
+			logging.Log.Fatal("Can not get google account by id")
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+
+		if eGoogleAccount == nil {
+			// TODO: create account here
 		}
 
 		w.WriteHeader(http.StatusAccepted)
