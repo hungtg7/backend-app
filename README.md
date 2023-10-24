@@ -12,6 +12,9 @@ TODO
 ## Getting started
 TODO
 
-## Docker build
-TODO
+## Docker run
+```
+docker compose up -d
+```
+
 
