@@ -3,7 +3,7 @@ module github.com/hungtg7/backend-app/app/user
 go 1.19
 
 require (
-	github.com/hungtg7/backend-app/lib v0.0.0-20230209171513-2bc4ebb35924
+	github.com/hungtg7/backend-app/lib v0.0.0-20231128190644-360debff5633
 	golang.org/x/oauth2 v0.15.0
 	gorm.io/driver/postgres v1.5.4
 	gorm.io/gorm v1.25.5

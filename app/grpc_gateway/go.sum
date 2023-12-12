@@ -21,6 +21,8 @@ github.com/hungtg7/backend-app/lib v0.0.0-20230219044630-fdeef161b607 h1:smP01jc
 github.com/hungtg7/backend-app/lib v0.0.0-20230219044630-fdeef161b607/go.mod h1:0m1gwU4oQO+g2F2huZoo8TBmS51ZqmyKUwzUmJtOpR4=
 github.com/hungtg7/backend-app/lib v0.0.0-20230219051350-23e6e6b6fd8c h1:lBrmrExvDzHfWUzbnYQcFsEFruDB2CxUnU0wG9rillU=
 github.com/hungtg7/backend-app/lib v0.0.0-20230219051350-23e6e6b6fd8c/go.mod h1:0m1gwU4oQO+g2F2huZoo8TBmS51ZqmyKUwzUmJtOpR4=
+github.com/hungtg7/backend-app/lib v0.0.0-20231128190644-360debff5633 h1:7JpQOcTNsU32NFrD8au4iC7DpNTIkVmyV4FI9R7JhpA=
+github.com/hungtg7/backend-app/lib v0.0.0-20231128190644-360debff5633/go.mod h1:0m1gwU4oQO+g2F2huZoo8TBmS51ZqmyKUwzUmJtOpR4=
 github.com/hungtg7/backend-app/pkg v0.0.0-20230212162945-1ac16d097272 h1:IBDe2Tblnqnr1biEn/7xTprqPaRfIVidzZiF7sLRiKY=
 github.com/hungtg7/backend-app/pkg v0.0.0-20230212162945-1ac16d097272/go.mod h1:SGWcIwL/Jdhr83R6AkZb6+cV1qT5RQpSCtsYTe9Hf88=
 github.com/hungtg7/backend-app/pkg v0.0.0-20230219051350-23e6e6b6fd8c h1:g75PjyeLtz8tDk3iaoljo0t/AVnA0ceMxlWmbentVCk=
