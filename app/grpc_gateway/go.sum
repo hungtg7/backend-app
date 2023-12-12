@@ -21,6 +21,8 @@ github.com/hungtg7/backend-app/pkg v0.0.0-20230212162945-1ac16d097272 h1:IBDe2Tb
 github.com/hungtg7/backend-app/pkg v0.0.0-20230212162945-1ac16d097272/go.mod h1:SGWcIwL/Jdhr83R6AkZb6+cV1qT5RQpSCtsYTe9Hf88=
 github.com/hungtg7/backend-app/pkg v0.0.0-20230219051350-23e6e6b6fd8c h1:g75PjyeLtz8tDk3iaoljo0t/AVnA0ceMxlWmbentVCk=
 github.com/hungtg7/backend-app/pkg v0.0.0-20230219051350-23e6e6b6fd8c/go.mod h1:C6zD9XlBRVNeFLmf+BlRdAXeoh6nDabyWxHUB1LsVyo=
+github.com/hungtg7/backend-app/pkg v0.0.0-20231128190644-360debff5633 h1:VGDW1vdzTDg237eyTqlcZJwZj5qQbaVRaZ5jVe4PdyE=
+github.com/hungtg7/backend-app/pkg v0.0.0-20231128190644-360debff5633/go.mod h1:C6zD9XlBRVNeFLmf+BlRdAXeoh6nDabyWxHUB1LsVyo=
 github.com/pkg/errors v0.8.1 h1:iURUrRGxPUNPdy5/HRSm+Yj6okJ6UtLINN0Q9M4+h3I=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/stretchr/testify v1.8.1 h1:w7B6lhMri9wdJUVmEZPGGhZzrYTPvgJArz7wNPgYKsk=
