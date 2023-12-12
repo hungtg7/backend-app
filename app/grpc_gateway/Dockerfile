@@ -1,5 +1,5 @@
 # Build stage
-FROM golang:1.19
+FROM golang:1.21
 WORKDIR /usr/src
 
 COPY lib/ .
