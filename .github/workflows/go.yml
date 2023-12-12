@@ -1,4 +1,4 @@
-name: pet.yaml
+name: Application build
 run-name: ${{ github.actor }} is running pet workflow
 on: [push]
 jobs:
