@@ -2,7 +2,7 @@ name: pet.yaml
 run-name: ${{ github.actor }} is running pet workflow
 on: [push]
 jobs:
-  build:
+  pet-build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -10,3 +10,27 @@ jobs:
         with:
           go-version: '1.19'
       - run: go build app/pet/cmd/main.go
+  user-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v3
+        with:
+          go-version: '1.19'
+      - run: go build app/user/cmd/main.go
+  grpc-gw-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v3
+        with:
+          go-version: '1.19'
+      - run: go build app/grpc_gateway/main.go
+  order-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v3
+        with:
+          go-version: '1.19'
+      - run: go build app/order/cmd/main.go
