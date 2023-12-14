@@ -3,7 +3,7 @@ module github.com/hungtg7/backend-app/app/pet
 go 1.18
 
 require (
-	github.com/grpc-ecosystem/go-grpc-middleware v1.4.0
+	github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.0.1
 	google.golang.org/grpc v1.60.0
 	google.golang.org/protobuf v1.31.0 //indirect
 	gorm.io/driver/postgres v1.4.6
@@ -11,6 +11,7 @@ require (
 )
 
 require (
+	github.com/grpc-ecosystem/go-grpc-middleware v1.3.0
 	github.com/hungtg7/backend-app/lib v0.0.0-20231128190644-360debff5633
 	github.com/hungtg7/backend-app/pkg v0.0.0-20231128190644-360debff5633
 )
