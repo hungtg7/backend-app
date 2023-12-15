@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/gorilla/mux v1.8.1
-	github.com/grpc-ecosystem/go-grpc-middleware v1.4.0
+	github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.0.1
 	github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.0.1
 	go.uber.org/zap v1.26.0
 	golang.org/x/net v0.19.0
