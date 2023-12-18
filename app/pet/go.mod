@@ -11,7 +11,7 @@ require (
 )
 
 require (
-	github.com/grpc-ecosystem/go-grpc-middleware v1.3.0
+	github.com/grpc-ecosystem/go-grpc-middleware v1.4.0
 	github.com/hungtg7/backend-app/lib v0.0.0-20231128190644-360debff5633
 	github.com/hungtg7/backend-app/pkg v0.0.0-20231128190644-360debff5633
 )
