@@ -5,7 +5,7 @@ go 1.18
 require (
 	github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.0.1
 	google.golang.org/grpc v1.60.0
-	google.golang.org/protobuf v1.31.0 //indirect
+	google.golang.org/protobuf v1.32.0 //indirect
 	gorm.io/driver/postgres v1.4.6
 	gorm.io/gorm v1.24.3
 )
