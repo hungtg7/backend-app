@@ -6,7 +6,7 @@ require (
 	github.com/hungtg7/backend-app/lib v0.0.0-20231128190644-360debff5633
 	golang.org/x/oauth2 v0.16.0
 	gorm.io/driver/postgres v1.5.4
-	gorm.io/gorm v1.25.5
+	gorm.io/gorm v1.25.7
 )
 
 require (
