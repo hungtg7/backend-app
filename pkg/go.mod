@@ -3,7 +3,7 @@ module github.com/hungtg7/backend-app/pkg
 go 1.19
 
 require (
-	github.com/grpc-ecosystem/grpc-gateway/v2 v2.18.1
+	github.com/grpc-ecosystem/grpc-gateway/v2 v2.19.1
 	google.golang.org/genproto/googleapis/api v0.0.0-20240213162025-012b6fc9bca9
 	google.golang.org/grpc v1.61.0
 	google.golang.org/protobuf v1.32.0
