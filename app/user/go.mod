@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/hungtg7/backend-app/lib v0.0.0-20240219032639-1edd3b118f4d
 	golang.org/x/oauth2 v0.16.0
-	gorm.io/driver/postgres v1.5.4
+	gorm.io/driver/postgres v1.5.7
 	gorm.io/gorm v1.25.7
 )
 
