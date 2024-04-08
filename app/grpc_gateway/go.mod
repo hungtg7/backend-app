@@ -3,7 +3,7 @@ module github.com/hungtg7/backend-app/app/grpc_gateway
 go 1.19
 
 require (
-	github.com/golang/glog v1.2.0
+	github.com/golang/glog v1.2.1
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.19.1
 	github.com/hungtg7/backend-app/lib v0.0.0-20240219032639-1edd3b118f4d
 	github.com/hungtg7/backend-app/pkg v0.0.0-20240219032639-1edd3b118f4d
