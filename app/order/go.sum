@@ -13,6 +13,8 @@ github.com/hungtg7/backend-app/lib v0.0.0-20231128190644-360debff5633 h1:7JpQOcT
 github.com/hungtg7/backend-app/lib v0.0.0-20231128190644-360debff5633/go.mod h1:0m1gwU4oQO+g2F2huZoo8TBmS51ZqmyKUwzUmJtOpR4=
 github.com/hungtg7/backend-app/lib v0.0.0-20240219032639-1edd3b118f4d h1:16r/5rOoQbudnS8wixDZ35lnKSz1xbuZ2lNz/jEx3qo=
 github.com/hungtg7/backend-app/lib v0.0.0-20240219032639-1edd3b118f4d/go.mod h1:dxbFI4a6Bst9v4HblUFf+yvS3IqF319TC+AED2S42Uk=
+github.com/hungtg7/backend-app/lib v0.0.0-20240408024453-c9dda4dd3bca h1:p6fdHz1pi7uo6PCYdZ36O7+gqcDF+Vth6q41Kp9aclg=
+github.com/hungtg7/backend-app/lib v0.0.0-20240408024453-c9dda4dd3bca/go.mod h1:pacsEddj7AGZIsrnaU0f9uIZ8E7VAVz3wO/2TWasuP0=
 github.com/jackc/pgpassfile v1.0.0 h1:/6Hmqy13Ss2zCq62VdNG8tM1wchn8zjSGOBJ6icpsIM=
 github.com/jackc/pgpassfile v1.0.0/go.mod h1:CEx0iS5ambNFdcRtxPj5JhEz+xB6uRky5eyVu/W2HEg=
 github.com/jackc/pgservicefile v0.0.0-20200714003250-2b9c44734f2b/go.mod h1:vsD4gTJCa9TptPL8sPkXrLZ+hDuNrZCnj29CQpr4X1E=
