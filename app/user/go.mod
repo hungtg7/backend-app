@@ -4,14 +4,14 @@ go 1.19
 
 require (
 	github.com/hungtg7/backend-app/lib v0.0.0-20240219032639-1edd3b118f4d
-	golang.org/x/oauth2 v0.16.0
+	golang.org/x/oauth2 v0.21.0
 	gorm.io/driver/postgres v1.5.7
 	gorm.io/gorm v1.25.7
 )
 
 require (
 	cloud.google.com/go/compute v1.20.1 // indirect
-	cloud.google.com/go/compute/metadata v0.2.3 // indirect
+	cloud.google.com/go/compute/metadata v0.3.0 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/gorilla/mux v1.8.1 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
