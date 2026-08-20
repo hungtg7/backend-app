@@ -8,7 +8,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v3
         with:
-          go-version: '1.19'
+          go-version: '1.27'
       - run: go build app/pet/cmd/main.go
   user-build:
     runs-on: ubuntu-latest
@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v3
         with:
-          go-version: '1.19'
+          go-version: '1.27'
       - run: go build app/user/cmd/main.go
   grpc-gw-build:
     runs-on: ubuntu-latest
@@ -24,7 +24,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v3
         with:
-          go-version: '1.19'
+          go-version: '1.27'
       - run: go build app/grpc_gateway/main.go
   order-build:
     runs-on: ubuntu-latest
@@ -32,5 +32,5 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v3
         with:
-          go-version: '1.19'
+          go-version: '1.27'
       - run: go build app/order/cmd/main.go
